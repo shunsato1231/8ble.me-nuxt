@@ -1,9 +1,7 @@
+import webpack from 'webpack'
 
 export default {
-  mode: 'spa',
-  /*
-  ** Headers of the page
-  */
+  mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -15,40 +13,37 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
-  /*
-  ** Global CSS
-  */
-  css: [
-  ],
-  /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-  ],
-  /*
-  ** Nuxt.js dev-modules
-  */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
-  /*
-  ** Nuxt.js modules
-  */
   modules: [
+    '@nuxtjs/style-resources'
   ],
-  /*
-  ** Build configuration
-  */
+  styleResources: {
+    stylus: [
+      '~/assets/style/global.styl'
+    ]
+  },
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
+    plugins: [
+      new webpack.ProvidePlugin({
+        '_': 'lodash'
+      })
+    ]
+  },
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'about',
+        path: '/about',
+        component: resolve(__dirname, 'pages/index.vue')
+      },
+      {
+        name: 'blog',
+        path: '/blog',
+        component: resolve(__dirname, 'pages/index.vue')
+      }
+      )
     }
   }
 }

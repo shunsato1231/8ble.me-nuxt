@@ -1,0 +1,43 @@
+@import "~assets/style/_valiables.styl"
+
+breakpoint(bpName)
+    for name in bpName
+        if name == 'small'
+            @media only screen and (max-width: screen-small)
+                {block}
+        if name == 'middle'
+            @media only screen and (min-width: screen-small) and (max-width: screen-large)
+                {block}
+        if name == 'large'
+            @media only screen and (min-width: screen-large)
+                {block}
+
+font-size(value) {
+    font-size: value; 
+    /* add PX (or original value) as backup */
+
+    if (value is inherit) {
+        /* do nothing, "inherit" has no unit */
+    } else {
+        font-size: remify(value);
+    }
+}
+
+remify(value) { 
+  /* separate mixin, so it can be used elsewhere */
+    u = unit(value);
+
+    if (u is 'px') {
+        return unit(value/10, 'rem');
+    } else {
+        return unit(value, u);
+    }
+}
+
+pc()
+  @media screen and (min-width: 768px)
+    {block}
+
+sp()
+  @media screen and (max-width: 768px)
+    {block}
