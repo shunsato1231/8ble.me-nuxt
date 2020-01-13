@@ -1,14 +1,14 @@
 <template lang="pug">
   ul
-    li(v-for="(num, index) in indexNumber" :key="index")
-      a(:class="{'active': activeSectionIndex == index}") {{index}}
+    li(v-for="(anchor, index) in anchorList" :key="index")
+      nuxt-link(:to="anchor" :class="{'active': activeSectionIndex == index}") {{index}}
 </template>
 
 <script>
 export default {
   props: {
-    indexNumber: {
-      type: Number,
+    anchorList: {
+      type: Array,
       required: true
     },
     activeSectionIndex: {

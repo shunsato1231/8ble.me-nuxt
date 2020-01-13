@@ -2,7 +2,7 @@
   main
     .wrapper(:style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
       slot
-    SectionScrollNavigation.nav(:index-number="anchorList.length", :active-section-index='activeSectionIndex')
+    SectionScrollNavigation.nav(:anchor-list="anchorList", :active-section-index='activeSectionIndex')
 </template>
 
 <script>
