@@ -42,6 +42,11 @@ export default {
         name: 'blog',
         path: '/blog',
         component: resolve(__dirname, 'pages/index.vue')
+      },
+      {
+        name: 'contact',
+        path: '/contact',
+        component: resolve(__dirname, 'pages/index.vue')
       }
       )
     }

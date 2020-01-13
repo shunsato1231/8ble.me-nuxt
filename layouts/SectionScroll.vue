@@ -1,6 +1,7 @@
 <template lang="pug">
   main
-    SectionScrollWrapper
+    h1
+    SectionScrollWrapper(:anchor-list="anchorList")
       nuxt
 </template>
 
@@ -11,12 +12,17 @@ export default {
   components: {
     SectionScrollWrapper
   },
+  data () {
+    return {
+      anchorList: []
+    }
+  },
   created () {
-    this.$nuxt.$on('updateAnchor', this.setAnchor)
+    this.$nuxt.$on('updateAnchorList', this.setAnchorList)
   },
   methods: {
-    setAnchor (anchor) {
-      console.log(anchor)
+    setAnchorList (anchorList) {
+      this.anchorList = anchorList
     }
   }
 }

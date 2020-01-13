@@ -1,8 +1,9 @@
 <template lang="pug">
   div
-    section(data-href="/") home
-    section(data-href="/about") about
-    section(data-href="/blog") blog
+    section home
+    section about
+    section blog
+    section contact
 </template>
 
 <script>
@@ -10,15 +11,16 @@ export default {
   layout: 'SectionScroll',
   data () {
     return {
-      anchor: [
+      anchorList: [
         '/',
         '/about',
-        '/blog'
+        '/blog',
+        '/contact'
       ]
     }
   },
   mounted () {
-    this.$nuxt.$emit('updateAnchor', this.anchor)
+    this.$nuxt.$emit('updateAnchorList', this.anchorList)
   }
 }
 </script>

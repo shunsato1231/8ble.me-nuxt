@@ -1,28 +1,51 @@
 <template lang="pug">
   ul
-    li(v-for="index of indexNumber" :key="index" :class="{'active': activeSectionIndex == index}")
-      {{index}}
+    li(v-for="(num, index) in indexNumber" :key="index")
+      a(:class="{'active': activeSectionIndex == index}") {{index}}
 </template>
 
 <script>
 export default {
   props: {
     indexNumber: {
-      type: String,
+      type: Number,
       required: true
     },
-
     activeSectionIndex: {
-      type: String,
+      type: Number,
       required: true
     }
-  },
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
   li
     text-align center
-    font-size(20px)
     font-family 'Rajdhani', sans-serif
+    a
+      color #ccc
+      font-weight 400
+      font-size(20px)
+      &:hover
+        text-decoration none
+        color #000
+        font-size(30px)
+        font-weight 600
+    .active
+      position relative
+      display block
+      width 100%
+      font-size(30px)
+      font-weight 600
+      color #000
+      &::before
+        position absolute
+        content ''
+        width 20px
+        height 1px
+        transform translateY(-50%)
+        background #000
+        left -22px
+        top 50%
 </style>

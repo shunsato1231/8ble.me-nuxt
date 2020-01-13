@@ -2,32 +2,51 @@
   main
     .wrapper(:style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
       slot
+    SectionScrollNavigation.nav(:index-number="anchorList.length", :active-section-index='activeSectionIndex')
 </template>
 
 <script>
 import _ from 'lodash'
+import SectionScrollNavigation from '../molecules/SectionScrollNavication.vue'
 export default {
+  components: {
+    SectionScrollNavigation
+  },
+  props: {
+    anchorList: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       mousewheelevent: '',
       sections: '',
-      activeSectionIndex: '',
-      prevActiveSectionIndex: '',
+      activeSectionIndex: 0,
+      prevActiveSectionIndex: 0,
       windowHeight: '',
       prevTime: '',
-      prevDelta: ''
+      prevDelta: '',
+      anchorListState: []
     }
   },
   watch: {
     '$route' (to, from) {
       if (to.path !== from.path) {
         const self = this
-        const index = _.findIndex(self.sections, function (o) { return o.dataset.href === to.path })
+        const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === to.path })
         this.activeSectionIndex = index
       }
     },
+    anchorList (value) {
+      this.anchorListState = value
+
+      const self = this
+      const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === self.$route.path })
+      this.activeSectionIndex = index
+    },
     activeSectionIndex (index, prevIndex) {
-      const toPath = this.sections[index].dataset.href
+      const toPath = this.anchorListState[index]
       if (toPath !== this.$route.path) {
         this.$router.push(toPath)
         this.sections[prevIndex].classList.remove('active')
@@ -41,14 +60,11 @@ export default {
     this.mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll'
     this.windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight
 
-    this.sections = this.$el.querySelectorAll('section')
     window.addEventListener('resize', this.handleResize)
     window.addEventListener(this.mousewheelevent, this.handleWheel, false)
     this.prevTime = new Date().getTime()
 
-    const self = this
-    const index = _.findIndex(self.sections, function (o) { return o.dataset.href === self.$route.path })
-    this.activeSectionIndex = index
+    this.sections = this.$el.querySelectorAll('section')
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
@@ -110,7 +126,12 @@ export default {
     touch-action none
     position relative
     transition all 700ms ease 0s;
-
+  .nav
+    position fixed
+    left 0
+    top: 50%
+    margin-left 22px
+    transform translateY(-50%)
   section
     height 100vh
     width 100vw
