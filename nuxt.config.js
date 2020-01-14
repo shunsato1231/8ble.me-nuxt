@@ -21,7 +21,8 @@ export default {
   ],
   styleResources: {
     stylus: [
-      '~/assets/style/global.styl'
+      '~/assets/style/reset.styl',
+      '~/assets/style/_mixins.styl',
     ]
   },
   build: {
