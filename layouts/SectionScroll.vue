@@ -1,8 +1,6 @@
 <template lang="pug">
-  main
-    h1
-    SectionScrollWrapper(:anchor-list="anchorList")
-      nuxt
+  SectionScrollWrapper(:anchor-list="anchorList")
+    nuxt
 </template>
 
 <script>

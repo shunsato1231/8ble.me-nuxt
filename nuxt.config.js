@@ -21,7 +21,6 @@ export default {
   ],
   styleResources: {
     stylus: [
-      '~/assets/style/reset.styl',
       '~/assets/style/_mixins.styl',
     ]
   },
@@ -32,6 +31,9 @@ export default {
       })
     ]
   },
+  plugins: [
+    '@/plugins/mixins'
+  ],
   router: {
     extendRoutes (routes, resolve) {
       routes.push({
