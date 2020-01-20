@@ -67,11 +67,14 @@ export default {
 
     window.addEventListener('resize', this.handleResize)
     window.addEventListener(this.mousewheelevent, this.handleWheel, false)
+    window.addEventListener('keydown', this.handleKeydown, false)
+
     this.prevTime = new Date().getTime()
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
     window.removeEventListener(this.mousewheelevent, this.handleWheel, false)
+    window.removeEventListener('keydown', this.handleKeydown, false)
   },
   methods: {
     handleResize: _.debounce(function () {
@@ -90,10 +93,10 @@ export default {
         curTime = e.timeStamp
 
         if (!isFired && curTime - this.prevTime > 250) {
-          if (e.deltaY < 0 && this.activeSectionIndex > 0) {
-            this.activeSectionIndex--
-          } else if (e.deltaY > 0 && this.activeSectionIndex + 1 < this.anchorListState.length) {
-            this.activeSectionIndex++
+          if (e.deltaY < 0) {
+            this.scrollUp()
+          } else {
+            this.scrollDown()
           }
 
           isFired = true
@@ -106,8 +109,27 @@ export default {
 
       this.prevDelta = delta
     },
-    setIndex (index) {
-      this.activeSectionIndex = index
+    handleKeydown (e) {
+      switch (e.key) {
+        case 'ArrowUp':
+          this.scrollUp()
+          break
+        case 'ArrowDown':
+          this.scrollDown()
+          break
+        default:
+          break
+      }
+    },
+    scrollUp () {
+      if (this.activeSectionIndex > 0) {
+        this.activeSectionIndex--
+      }
+    },
+    scrollDown () {
+      if (this.activeSectionIndex + 1 < this.anchorListState.length) {
+        this.activeSectionIndex++
+      }
     }
   }
 }
