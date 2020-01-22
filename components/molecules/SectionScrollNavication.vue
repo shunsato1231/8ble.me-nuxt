@@ -1,7 +1,7 @@
 <template lang="pug">
   ul
     li(v-for="(anchor, index) in anchorList" :key="index")
-      nuxt-link(:to="anchor" :class="{'active': activeSectionIndex == index}") {{index}}
+      nuxt-link(:to="{hash: anchor}" :class="{'active': activeSectionIndex == index}") {{index}}
 </template>
 
 <script>

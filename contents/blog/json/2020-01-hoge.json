@@ -1,0 +1,21 @@
+{
+  "title": "hoge",
+  "created_at": "2020-01-21T00:00:00.000Z",
+  "slug": "hoge",
+  "thumbnail": "blog/2020/01/21/thumb.png",
+  "category": "tech",
+  "tags": [
+    "Nuxt.js",
+    "jade",
+    "gulp",
+    "po"
+  ],
+  "description": "hogehogehogehogehogehogehogehoge",
+  "bodyContent": "# hoge\n## ふが\n\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。",
+  "bodyHtml": "<h1>hoge</h1>\n<h2>ふが</h2>\n<p>本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。</p>\n",
+  "dir": "contents/blog/json",
+  "base": "2020-01-hoge.json",
+  "ext": ".json",
+  "sourceBase": "2020-01-hoge.md",
+  "sourceExt": ".md"
+}

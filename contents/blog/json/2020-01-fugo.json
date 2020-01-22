@@ -1,0 +1,21 @@
+{
+  "title": "fugo",
+  "created_at": "2020-01-22T00:00:00.000Z",
+  "slug": "fugo",
+  "thumbnail": "blog/2020/01/22/thumb.png",
+  "category": "tech",
+  "tags": [
+    "Nuxt.js",
+    "jade",
+    "gulp",
+    "po"
+  ],
+  "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
+  "bodyContent": "# hoge\n## ふご\n\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。",
+  "bodyHtml": "<h1>hoge</h1>\n<h2>ふご</h2>\n<p>本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。</p>\n",
+  "dir": "contents/blog/json",
+  "base": "2020-01-fugo.json",
+  "ext": ".json",
+  "sourceBase": "2020-01-fugo.md",
+  "sourceExt": ".md"
+}

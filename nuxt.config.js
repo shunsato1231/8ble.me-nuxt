@@ -32,26 +32,7 @@ export default {
     ]
   },
   plugins: [
-    '@/plugins/mixins'
-  ],
-  router: {
-    extendRoutes (routes, resolve) {
-      routes.push({
-        name: 'about',
-        path: '/about',
-        component: resolve(__dirname, 'pages/index.vue')
-      },
-      {
-        name: 'blog',
-        path: '/blog',
-        component: resolve(__dirname, 'pages/index.vue')
-      },
-      {
-        name: 'contact',
-        path: '/contact',
-        component: resolve(__dirname, 'pages/index.vue')
-      }
-      )
-    }
-  }
+    '@/plugins/mixins',
+    '@/plugins/filter'
+  ]
 }

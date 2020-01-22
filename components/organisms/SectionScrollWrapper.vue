@@ -30,32 +30,29 @@ export default {
       windowHeight: '',
       prevTime: '',
       prevDelta: '',
-      anchorListState: [],
+      anchorListState: '',
       initialLoadingFlag: true
     }
   },
   watch: {
     '$route' (to, from) {
-      if (to.path !== from.path) {
+      if (to.hash !== from.hash) {
         const self = this
-        const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === to.path })
+        const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === to.hash })
         this.activeSectionIndex = index
       }
     },
-    async anchorList (value) {
+    anchorList (value) {
       this.anchorListState = value
 
       const self = this
-      const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === self.$route.path })
+      const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === self.$route.hash })
       this.activeSectionIndex = index
-      await this.$delay(1000, () => {
-        this.initialLoadingFlag = false
-      }).exec()
     },
     activeSectionIndex (index, prevIndex) {
-      const toPath = this.anchorListState[index]
-      if (toPath !== this.$route.path && !this.initialLoadingFlag) {
-        this.$router.push(toPath)
+      const toHash = this.anchorListState[index]
+      if (toHash !== this.$route.hash && !this.initialLoadingFlag) {
+        this.$router.push({ hash: toHash })
       }
 
       this.prevActiveSectionIndex = index
@@ -70,6 +67,7 @@ export default {
     window.addEventListener('keydown', this.handleKeydown, false)
 
     this.prevTime = new Date().getTime()
+    this.initialLoading()
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
@@ -121,15 +119,28 @@ export default {
           break
       }
     },
-    scrollUp () {
+    async initialLoading () {
+      await this.$delay(1000, () => {
+        this.initialLoadingFlag = false
+      }).exec()
+    },
+    async scrollUp () {
       if (this.activeSectionIndex > 0) {
+        this.$emit('animationReverse', this.activeSectionIndex)
         this.activeSectionIndex--
+
+        await this.$delay(1400, () => {
+          this.$emit('animationPlay', this.activeSectionIndex)
+        }).exec()
       }
     },
-    scrollDown () {
-      if (this.activeSectionIndex + 1 < this.anchorListState.length) {
-        this.activeSectionIndex++
-      }
+    async scrollDown () {
+      this.$emit('animationReverse', this.activeSectionIndex)
+      this.activeSectionIndex++
+
+      await this.$delay(1400, () => {
+        this.$emit('animationPlay', this.activeSectionIndex)
+      }).exec()
     }
   }
 }

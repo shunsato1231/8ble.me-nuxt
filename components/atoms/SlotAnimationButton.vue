@@ -1,7 +1,7 @@
 <template lang="pug">
   nuxt-link.button(:to="href" :style="{width:width + 'px', height:height + 'px'}" @mouseover.native="mouseover", @mouseleave.native="mouseleave")
-    span.str(v-for="str in textArray") {{str}}
-    .bg(:style="{width:width + 'px', height:height + 'px'}")
+    span.str(v-for="str in textArray" ref="str") {{str}}
+    .bg(:style="{width:width + 'px', height:height + 'px'}" ref="bg")
 </template>
 
 <script>
@@ -40,12 +40,12 @@ export default {
   },
   mounted () {
     this.animation = new TimelineMax({ paused: true })
-    this.animation.fromTo('.bg', 0.3,
+    this.animation.fromTo(this.$refs.bg, 0.3,
       { width: '0' },
       { width: '100%' },
       '#start'
     )
-    this.animation.staggerFromTo('.str', 0.2,
+    this.animation.staggerFromTo(this.$refs.str, 0.2,
       { color: '#000' },
       { color: '#fff', rotationX: 360 },
       0.1,

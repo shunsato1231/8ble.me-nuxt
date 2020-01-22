@@ -1,41 +1,64 @@
 <template lang="pug">
-  div
-    template(v-for="section in sectionList")
-      section(:is="section.component" ref="section" :class="{active: section.path === $route.path}") {{ section }}
+  SectionScrollWrapper(:anchorList="anchorList" @animationPlay="animationPlay", @animationReverse="animationReverse")
+    section(ref="home")
+    HomeAbout(ref="about")
+    HomeBlog(ref="blog" :posts="posts")
+    section(ref="contact")
+
 </template>
 
 <script>
 import _ from 'lodash'
 
+import SectionScrollWrapper from '../components/organisms/SectionScrollWrapper.vue'
 import HomeAbout from '../components/organisms/HomeAbout.vue'
+import HomeBlog from '../components/organisms/HomeBlog.vue'
+
 export default {
-  layout: 'SectionScroll',
   components: {
-    HomeAbout
+    SectionScrollWrapper,
+    HomeAbout,
+    HomeBlog
   },
   data () {
     return {
       sectionList: [
-        { path: '/', component: 'section' },
-        { path: '/about', component: HomeAbout },
-        { path: '/blog', component: 'section' },
-        { path: '/contact', component: 'section' }
-      ]
+        { hash: '', ref: 'home' },
+        { hash: '#about', ref: 'about' },
+        { hash: '#blog', ref: 'blog' },
+        { hash: '#contact', ref: 'contact' }
+      ],
+      anchorList: [],
+      index: ''
     }
   },
-  beforeRouteLeave (to, from, next) {
-    const self = this
-    const index = _.findIndex(self.sectionList, function (section) { return section.path === self.$route.path })
-
-    if (this.$refs.section[index].animation) {
-      this.$refs.section[index].reverse()
-    }
-
-    setTimeout(next, 1200)
+  asyncData () {
+    const json = require(`~/contents/blog/summary.json`)
+    const posts = _.orderBy(json.fileMap, 'created_at', 'desc').slice(0, 3)
+    return { posts }
   },
   mounted () {
-    const anchorList = _.map(this.sectionList, 'path')
-    this.$nuxt.$emit('updateAnchorList', anchorList)
+    this.anchorList = _.map(this.sectionList, 'hash')
+
+    const self = this
+    const index = _.findIndex(self.anchorList, function (anchor) { return anchor === self.$route.hash })
+    this.animationPlay(index)
+  },
+  methods: {
+    animationPlay (index) {
+      const ref = this.sectionList[index].ref
+
+      if (this.$refs[ref].animation) {
+        this.$refs[ref].animation.play()
+      }
+    },
+    animationReverse (index) {
+      const ref = this.sectionList[index].ref
+
+      if (this.$refs[ref].animation) {
+        this.$refs[ref].animation.timeScale(2).reverse()
+      }
+    }
   }
 }
 </script>
@@ -45,7 +68,4 @@ export default {
     width 100vw
     height 100vh
     padding 8% 5%
-    opacity 0
-  .active
-    opacity 1
 </style>

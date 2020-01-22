@@ -20,8 +20,7 @@
           HomeSectionContentSubHeading HomeTown
           ul
             li japan
-    SlotAnimationButton.moreButton(ref="moreButton")(:text="'More'", href="hoge")
-
+    SlotAnimationButton.moreButton(ref="moreButton" :text="'More'" href="hoge")
 </template>
 
 <script>
@@ -49,7 +48,6 @@ export default {
   },
   mounted () {
     this.createAnimation()
-    this.animation.play()
   },
   methods: {
     createAnimation () {
@@ -64,12 +62,6 @@ export default {
         .fromTo('.border', 1.5, { width: 0 }, { width: '100%', ease: Power4.easeInOut }, '-=2')
         .fromTo('.textWrapper', 2, { opacity: 0 }, { opacity: 1 }, '-=1.5')
         .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
-    },
-    reverse () {
-      if (this.reverseFlag) {
-        this.animation.timeScale(2).reverse()
-        this.reverseFlag = false
-      }
     }
   }
 }
