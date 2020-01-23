@@ -129,7 +129,7 @@ export default {
         this.$emit('animationReverse', this.activeSectionIndex)
         this.activeSectionIndex--
 
-        await this.$delay(1400, () => {
+        await this.$delay(1200, () => {
           this.$emit('animationPlay', this.activeSectionIndex)
         }).exec()
       }
@@ -138,7 +138,7 @@ export default {
       this.$emit('animationReverse', this.activeSectionIndex)
       this.activeSectionIndex++
 
-      await this.$delay(1400, () => {
+      await this.$delay(1200, () => {
         this.$emit('animationPlay', this.activeSectionIndex)
       }).exec()
     }
@@ -167,7 +167,7 @@ export default {
     height 100vh
     touch-action none
     position relative
-    transition all 700ms ease 1200ms;
+    transition all 700ms ease 1000ms;
   .nav
     position fixed
     left 0

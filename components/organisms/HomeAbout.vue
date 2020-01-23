@@ -42,8 +42,7 @@ export default {
   },
   data () {
     return {
-      animation: '',
-      reverseFlag: true
+      animation: ''
     }
   },
   mounted () {

@@ -3,12 +3,12 @@ article
   header
     ul
       li(v-for = "tag in post.tags")
-        i.fas.fa-tag
+        i(class="fas fa-tag" style="margin-right: 5px")
         span {{tag}}
     figure(v-if="post.thumbnail")
       img(:src="post.thumbnail")
     .category
-      i.fas.fa-folder
+      i(class="fas fa-folder" style="margin-right: 5px")
       span {{post.category}}
   .body
     h1 {{post.title}}
@@ -22,7 +22,12 @@ article
 export default {
   components: {
   },
-  props: ['post'],
+  props: {
+    post: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
     }

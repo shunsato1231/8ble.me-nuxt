@@ -1,12 +1,10 @@
 <template lang="pug">
   section
-    HomeSectionHeading(ref="mainHeading") Blog
+    HomeSectionHeading(ref="mainHeading") Contact
     .wrapper
-      template(v-for="post in posts")
-        Article.article(:post="post" ref="article")
-
-    SlotAnimationButton.moreButton(ref="moreButton")(:text="'More'", href="hoge")
-
+      i(class="fab fa-github")
+      i(class="fab fa-facebook-f")
+      i(class="fas fa-envelope")
 </template>
 
 <script>
@@ -14,19 +12,11 @@ import { TimelineMax, Bounce } from 'gsap'
 
 import HomeSectionHeading from '../atoms/HomeSectionHeading.vue'
 import SlotAnimationButton from '../atoms/SlotAnimationButton.vue'
-import Article from '../molecules/Article.vue'
 
 export default {
   components: {
     HomeSectionHeading,
-    SlotAnimationButton,
-    Article
-  },
-  props: {
-    posts: {
-      type: Array,
-      required: true
-    }
+    SlotAnimationButton
   },
   data () {
     return {
@@ -39,19 +29,26 @@ export default {
   methods: {
     createAnimation () {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
-      const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
       this.animation = new TimelineMax({ paused: true })
       this.animation.fromTo('h1 span', 2,
         { y: mainHeadingHeight, opacity: 0 },
         { y: 0, opacity: 1, ease: Bounce.easeOut })
-        .staggerFromTo('.article', 1,
-          { opacity: 0, y: -30 },
-          { opacity: 1, y: 0 },
-          0.3,
+        .fromTo('.fa-github', 1,
+          { y: -15, opacity: 0 },
+          { y: 0, opacity: 1 },
           '-=1'
         )
-        .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
+        .fromTo('.fa-facebook-f', 1,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1 },
+          '-=0.5'
+        )
+        .fromTo('.fa-envelope', 1,
+          { y: -15, opacity: 0 },
+          { y: 0, opacity: 1 },
+          '-=0.5'
+        )
     }
   }
 }
@@ -66,14 +63,19 @@ section
     margin 50px 0 0 auto
     opacity 0
   .wrapper
-    padding: 0;
     display flex
-    flex-flow row wrap
-    margin 0 auto
-    +breakpoint('small')
-      width 280px
-    +breakpoint('middle')
-      width 680px
-    +breakpoint('large')
-      width 1020px
+    justify-content center
+    padding 10% 0
+    i
+      display flex
+      width 60px
+      height 60px
+      justify-content center
+      align-items center
+      font-size(40px)
+      line-height 40px
+      background #000
+      color #fff
+      margin 0 25px
+      border-radius 5px
 </style>

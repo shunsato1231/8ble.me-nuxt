@@ -3,7 +3,7 @@
     section(ref="home")
     HomeAbout(ref="about")
     HomeBlog(ref="blog" :posts="posts")
-    section(ref="contact")
+    HomeContact(ref="contact")
 
 </template>
 
@@ -13,12 +13,14 @@ import _ from 'lodash'
 import SectionScrollWrapper from '../components/organisms/SectionScrollWrapper.vue'
 import HomeAbout from '../components/organisms/HomeAbout.vue'
 import HomeBlog from '../components/organisms/HomeBlog.vue'
+import HomeContact from '../components/organisms/HomeContact.vue'
 
 export default {
   components: {
     SectionScrollWrapper,
     HomeAbout,
-    HomeBlog
+    HomeBlog,
+    HomeContact
   },
   data () {
     return {
@@ -67,5 +69,5 @@ export default {
   section
     width 100vw
     height 100vh
-    padding 8% 5%
+    padding 0 5%
 </style>
