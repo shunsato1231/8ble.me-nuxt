@@ -1,6 +1,6 @@
 <template lang="pug">
   SectionScrollWrapper(:anchorList="anchorList" @animationPlay="animationPlay", @animationReverse="animationReverse")
-    section(ref="home")
+    Home(ref="home")
     HomeAbout(ref="about")
     HomeBlog(ref="blog" :posts="posts")
     HomeContact(ref="contact")
@@ -11,6 +11,7 @@
 import _ from 'lodash'
 
 import SectionScrollWrapper from '../components/organisms/SectionScrollWrapper.vue'
+import Home from '../components/organisms/Home.vue'
 import HomeAbout from '../components/organisms/HomeAbout.vue'
 import HomeBlog from '../components/organisms/HomeBlog.vue'
 import HomeContact from '../components/organisms/HomeContact.vue'
@@ -18,6 +19,7 @@ import HomeContact from '../components/organisms/HomeContact.vue'
 export default {
   components: {
     SectionScrollWrapper,
+    Home,
     HomeAbout,
     HomeBlog,
     HomeContact
