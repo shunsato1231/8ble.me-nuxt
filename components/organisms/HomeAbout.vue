@@ -61,6 +61,9 @@ export default {
         .fromTo('.border', 1.5, { width: 0 }, { width: '100%', ease: Power4.easeInOut }, '-=2')
         .fromTo('.textWrapper', 2, { opacity: 0 }, { opacity: 1 }, '-=1.5')
         .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
+    },
+    animationReverse () {
+      this.animation.timeScale(2).reverse()
     }
   }
 }

@@ -59,8 +59,8 @@ export default {
     animationReverse (index) {
       const ref = this.sectionList[index].ref
 
-      if (this.$refs[ref].animation) {
-        this.$refs[ref].animation.timeScale(2).reverse()
+      if (this.$refs[ref].animationReverse) {
+        this.$refs[ref].animationReverse()
       }
     }
   }

@@ -49,6 +49,9 @@ export default {
           { y: 0, opacity: 1 },
           '-=0.5'
         )
+    },
+    animationReverse () {
+      this.animation.timeScale(2).reverse()
     }
   }
 }

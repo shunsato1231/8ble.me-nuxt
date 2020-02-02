@@ -41,10 +41,11 @@ export default {
     setInterval(() => {
       this.caretFlag = !this.caretFlag
     }, 400)
-
-    // this.animationText = this.text
   },
   methods: {
+    stop (value) {
+      this.displayText = ''
+    }
   }
 }
 </script>

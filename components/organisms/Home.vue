@@ -2,7 +2,7 @@
   section
     h1(ref="title")
       div(v-for="str in titleSplit" ref="chars") {{str}}
-    TypingText.type(@complete="changeText", :text="description" caretColor="#999")
+    TypingText.type(@complete="changeText", :text="description" caretColor="#999", ref="typing")
     .scrollDown Scroll Down
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      title: '8ble.me',
+      title: 'Title',
       titleSplit: '',
       description: '',
       descriptions: [
@@ -26,37 +26,63 @@ export default {
         'description3, description3, description3, description3, description3'
       ],
       animation: '',
-      count: 0
+      count: 0,
+      stopChangetext: false
     }
   },
   mounted () {
-    this.animateTitle()
+    this.createAnimation()
   },
   created () {
     this.titleSplit = this.title.split('')
   },
   methods: {
+    createAnimation () {
+      this.animation = new TimelineMax({ paused: true, onReverseComplete: this.reverseFunction })
+      this.animation.add(this.animateTitle)
+        .fromTo('.type', 1, { opacity: 0 }, { opacity: 1 }, '+=2')
+        .add(this.animateTyping, 2)
+        .fromTo('.scrollDown', 1, { opacity: 0 }, { opacity: 1 })
+    },
+    animationReverse () {
+      this.animation.timeScale(2).reverse()
+    },
     animateTitle () {
       const tl = new TimelineMax()
       const chars = this.$refs.chars
       const centerIndex = Math.floor(chars.length / 2)
 
       for (let i = 0; i < chars.length; i++) {
-        tl.from(chars[i], 1.8, { x: (i - centerIndex) * 40, opacity: 0, scale: 1.5, ease: Bounce.easeOut }, i * 0.1)
+        tl.fromTo(chars[i], 1.8,
+          { x: (i - centerIndex) * 40, opacity: 0, scale: 1.5, ease: Bounce.easeOut },
+          { x: 0, opacity: 1, scale: 1, ease: Bounce.easeOut },
+          i * 0.1
+        )
       }
 
       tl.play()
     },
     animateTyping () {
+      this.stopChangetext = false
       this.count = 0
       this.description = this.descriptions[0]
     },
     changeText () {
+      if (this.stopChangetext) {
+        return
+      }
+
       if (this.count < this.descriptions.length - 1) {
         this.count++
       }
 
       this.description = this.descriptions[this.count]
+    },
+    reverseFunction () {
+      this.$refs.typing.stop()
+      this.stopChangetext = true
+      this.description = ''
+      this.$refs.typing.stop()
     }
   }
 }

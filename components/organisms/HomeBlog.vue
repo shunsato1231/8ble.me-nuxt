@@ -52,6 +52,9 @@ export default {
           '-=1'
         )
         .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
+    },
+    animationReverse () {
+      this.animation.timeScale(2).reverse()
     }
   }
 }
