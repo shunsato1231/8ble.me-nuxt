@@ -18,12 +18,18 @@ export default {
     '@nuxtjs/eslint-module'
   ],
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'nuxt-webfontloader'
   ],
   styleResources: {
     stylus: [
       '~/assets/style/_mixins.styl',
     ]
+  },
+  webfontloader: {
+    google: {
+      families: ['Rajdhani:400,500,600,700,800']
+    }
   },
   build: {
     plugins: [
