@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { TimelineMax, Bounce, Power4 } from 'gsap'
+import gsap from 'gsap'
 
 import HomeSectionHeading from '../atoms/HomeSectionHeading.vue'
 import HomeSectionContentHeading from '../atoms/HomeSectionContentHeading.vue'
@@ -53,14 +53,14 @@ export default {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
       const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
-      this.animation = new TimelineMax({ paused: true })
-      this.animation.fromTo('h1 span', 2,
+      this.animation = gsap.timeline({ paused: true })
+      this.animation.fromTo('h1 span',
         { y: mainHeadingHeight, opacity: 0 },
-        { y: 0, opacity: 1, ease: Bounce.easeOut })
-        .fromTo('h2', 2, { opacity: 0 }, { opacity: 1 }, '-=2')
-        .fromTo('.border', 1.5, { width: 0 }, { width: '100%', ease: Power4.easeInOut }, '-=2')
-        .fromTo('.textWrapper', 2, { opacity: 0 }, { opacity: 1 }, '-=1.5')
-        .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
+        { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
+        .fromTo('h2', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=2')
+        .fromTo('.border', { width: 0 }, { width: '100%', ease: 'Power4.easeInOut', duration: 1.5 }, '-=2')
+        .fromTo('.textWrapper', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.5')
+        .fromTo('.moreButton', { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()

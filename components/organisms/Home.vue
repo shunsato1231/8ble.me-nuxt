@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { TimelineMax, Bounce } from 'gsap'
+import gsap from 'gsap'
 
 import TypingText from '../atoms/TypingText.vue'
 
@@ -38,24 +38,24 @@ export default {
   },
   methods: {
     createAnimation () {
-      this.animation = new TimelineMax({ paused: true, onReverseComplete: this.reverseFunction })
+      this.animation = gsap.timeline({ paused: true, onReverseComplete: this.reverseFunction })
       this.animation.add(this.animateTitle)
-        .fromTo('.type', 1, { opacity: 0 }, { opacity: 1 }, '+=2')
+        .fromTo('.type', { opacity: 0 }, { opacity: 1, duration: 1 }, '+=2')
         .add(this.animateTyping, 2)
-        .fromTo('.scrollDown', 1, { opacity: 0 }, { opacity: 1 })
+        .fromTo('.scrollDown', { opacity: 0 }, { opacity: 1, duration: 1 })
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
     },
     animateTitle () {
-      const tl = new TimelineMax()
+      const tl = gsap.timeline()
       const chars = this.$refs.chars
       const centerIndex = Math.floor(chars.length / 2)
 
       for (let i = 0; i < chars.length; i++) {
-        tl.fromTo(chars[i], 1.8,
-          { x: (i - centerIndex) * 40, opacity: 0, scale: 1.5, ease: Bounce.easeOut },
-          { x: 0, opacity: 1, scale: 1, ease: Bounce.easeOut },
+        tl.fromTo(chars[i],
+          { x: (i - centerIndex) * 40, opacity: 0, scale: 1.5, ease: 'Bounce.easeOut' },
+          { x: 0, opacity: 1, scale: 1, ease: 'Bounce.easeOut', duration: 1.8 },
           i * 0.1
         )
       }

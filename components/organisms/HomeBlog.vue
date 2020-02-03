@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { TimelineMax, Bounce } from 'gsap'
+import gsap from 'gsap'
 
 import HomeSectionHeading from '../atoms/HomeSectionHeading.vue'
 import SlotAnimationButton from '../atoms/SlotAnimationButton.vue'
@@ -41,17 +41,16 @@ export default {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
       const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
-      this.animation = new TimelineMax({ paused: true })
-      this.animation.fromTo('h1 span', 2,
+      this.animation = gsap.timeline({ paused: true })
+      this.animation.fromTo('h1 span',
         { y: mainHeadingHeight, opacity: 0 },
-        { y: 0, opacity: 1, ease: Bounce.easeOut })
-        .staggerFromTo('.article', 1,
+        { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
+        .fromTo('.article',
           { opacity: 0, y: -30 },
-          { opacity: 1, y: 0 },
-          0.3,
+          { opacity: 1, y: 0, duration: 1, stagger: 0.4 },
           '-=1'
         )
-        .fromTo('.moreButton', 0.1, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1 }, '-=1.5')
+        .fromTo('.moreButton', { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
