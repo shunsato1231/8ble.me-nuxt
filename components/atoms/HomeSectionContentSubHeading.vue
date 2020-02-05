@@ -1,16 +1,10 @@
 <template lang="pug">
-  h3
+  h3(:class="$style.heading")
     slot
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
-<style lang="stylus" scoped>
-h3
+<style lang="stylus" module>
+.heading
   font-size(20px)
   font-weight 600
   font-family 'Rajdhani', sans-serif

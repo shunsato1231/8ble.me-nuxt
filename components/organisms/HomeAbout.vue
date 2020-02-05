@@ -1,16 +1,16 @@
 <template lang="pug">
-  section
+  section(:class="$style.wrapper")
     HomeSectionHeading(ref="mainHeading") About
-    .contentWrapper
-      .profile
-        HomeSectionContentHeading Profile
-        .textWrapper
+    div(:class="$style.contentWrapper")
+      div(:class="$style.profile")
+        HomeSectionContentHeading(ref="contentHeading_1") Profile
+        div(:class="$style.textWrapper" ref="textWrapper_1")
           | ProfileTextProfileTextProfileText
           HomeSectionContentSubHeading Skill
           HomeSkillGraphs.graphs
-      .personalData
-        HomeSectionContentHeading PersonalData
-        .textWrapper
+      div(:class="$style.personalData")
+        HomeSectionContentHeading(ref="contentHeading_2") PersonalData
+        div(:class="$style.textWrapper" ref="textWrapper_2")
           HomeSectionContentSubHeading Name
           ul
             li suriranka osakana
@@ -20,7 +20,7 @@
           HomeSectionContentSubHeading HomeTown
           ul
             li japan
-    SlotAnimationButton.moreButton(ref="moreButton" :text="'More'" href="hoge")
+    SlotAnimationButton(:class="$style.moreButton" ref="moreButton" :text="'More'" href="hoge")
 </template>
 
 <script>
@@ -53,14 +53,19 @@ export default {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
       const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
+      const contentHeadings = [this.$refs.contentHeading_1.$el, this.$refs.contentHeading_2.$el]
+      const contentHeadingsBorder = [this.$refs.contentHeading_1.$refs.border, this.$refs.contentHeading_1.$refs.border]
+
+      const textWrappers = [this.$refs.textWrapper_1, this.$refs.textWrapper_2]
+
       this.animation = gsap.timeline({ paused: true })
-      this.animation.fromTo('h1 span',
+      this.animation.fromTo(this.$refs.mainHeading.$refs.text,
         { y: mainHeadingHeight, opacity: 0 },
         { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
-        .fromTo('h2', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=2')
-        .fromTo('.border', { width: 0 }, { width: '100%', ease: 'Power4.easeInOut', duration: 1.5 }, '-=2')
-        .fromTo('.textWrapper', { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.5')
-        .fromTo('.moreButton', { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
+        .fromTo(contentHeadings, { opacity: 0 }, { opacity: 1, duration: 2 }, '-=2')
+        .fromTo(contentHeadingsBorder, { width: 0 }, { width: '100%', ease: 'Power4.easeInOut', duration: 1.5 }, '-=2')
+        .fromTo(textWrappers, { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.5')
+        .fromTo(this.$refs.moreButton.$el, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
@@ -69,8 +74,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-section
+<style lang="stylus" module>
+.wrapper
   display flex
   flex-direction column
   justify-content center

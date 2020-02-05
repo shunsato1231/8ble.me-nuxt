@@ -1,7 +1,7 @@
 <template lang="pug">
-  nuxt-link.button(:to="href" :style="{width:width + 'px', height:height + 'px'}" @mouseover.native="mouseover", @mouseleave.native="mouseleave")
-    span.str(v-for="str in textArray" ref="str") {{str}}
-    .bg(:style="{width:width + 'px', height:height + 'px'}" ref="bg")
+  nuxt-link(:class="$style.button" :to="href" :style="{width:width + 'px', height:height + 'px'}" @mouseover.native="mouseover", @mouseleave.native="mouseleave")
+    span(:class="$style.str" v-for="str in textArray" ref="str") {{str}}
+    div(:class="$style.bg" :style="{width:width + 'px', height:height + 'px'}" ref="bg")
 </template>
 
 <script>
@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" module>
   .button
     position relative
     display flex

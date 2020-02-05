@@ -23,7 +23,8 @@ export default {
   ],
   styleResources: {
     stylus: [
-      '~/assets/style/_mixins.styl',
+      '~/assets/style/mixins.styl',
+      '~assets/style/mediaquery.styl'
     ]
   },
   webfontloader: {

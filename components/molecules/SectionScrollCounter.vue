@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(:class="$style.counter")
     span {{activeSectionIndex}}
     span /
     span {{sectionNumber}}
@@ -20,8 +20,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-div
+<style lang="stylus" module>
+.counter
   font-family 'Rajdhani', sans-serif
   font-size(18px)
   font-weight 500

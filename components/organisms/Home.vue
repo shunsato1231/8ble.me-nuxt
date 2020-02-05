@@ -1,9 +1,9 @@
 <template lang="pug">
-  section
+  section(:class="$style.wrapper")
     h1(ref="title")
       div(v-for="str in titleSplit" ref="chars") {{str}}
-    TypingText.type(@complete="changeText", :text="description" caretColor="#999", ref="typing")
-    .scrollDown Scroll Down
+    TypingText(:class="$style.type" @complete="changeText", :text="description" caretColor="#999", ref="typing")
+    div(:class="$style.scrollDown" ref="scrollDown") Scroll Down
 </template>
 
 <script>
@@ -40,9 +40,9 @@ export default {
     createAnimation () {
       this.animation = gsap.timeline({ paused: true, onReverseComplete: this.reverseFunction })
       this.animation.add(this.animateTitle)
-        .fromTo('.type', { opacity: 0 }, { opacity: 1, duration: 1 }, '+=2')
+        .fromTo(this.$refs.type, { opacity: 0 }, { opacity: 1, duration: 1 }, '+=2')
         .add(this.animateTyping, 2)
-        .fromTo('.scrollDown', { opacity: 0 }, { opacity: 1, duration: 1 })
+        .fromTo(this.$refs.scrollDown, { opacity: 0 }, { opacity: 1, duration: 1 })
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
@@ -88,8 +88,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-section
+<style lang="stylus" module>
+.wrapper
   display flex
   flex-direction column
   justify-content center
@@ -98,9 +98,21 @@ section
     display flex
     font-size 8vw
     line-height 8vw
+    +breakpoint(middle)
+      font-size 13vw
+      line-height 13vw
+    +breakpoint(small)
+      font-size 20vw
+      line-height 20vw
     font-family 'Rajdhani', sans-serif
   .type
     font-size 2vw
+    +breakpoint(middle)
+      font-size 3vw
+    +breakpoint(small)
+      font-size 16px
+      line-height 20px
+      height 40px
     height 20px
     font-family 'Rajdhani', sans-serif
     font-weight 600

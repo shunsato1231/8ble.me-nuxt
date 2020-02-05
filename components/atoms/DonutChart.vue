@@ -1,7 +1,7 @@
 <template lang="pug">
-svg.circle(:viewBox="viewBox")
-  circle.stroke.base(:cx="viewBoxWidth / 2" :cy="viewBoxWidth / 2" :r="radius" :stroke-width="strokeWidth")
-  circle.stroke.percent(ref="percent" :cx="viewBoxWidth / 2" :cy="viewBoxWidth / 2" :r="radius" :stroke-width="strokeWidth")
+svg(:viewBox="viewBox")
+  circle(:class="[$style.stroke, $style.base]" :cx="viewBoxWidth / 2" :cy="viewBoxWidth / 2" :r="radius" :stroke-width="strokeWidth")
+  circle(:class="[$style.stroke, $style.percent]" ref="percent" :cx="viewBoxWidth / 2" :cy="viewBoxWidth / 2" :r="radius" :stroke-width="strokeWidth")
   text(x="50%" y="50%" text-anchor="middle" font-size="4" font-weight="bold")
     | {{text}}
   text(x="50%" y="65%" text-anchor="middle" font-size="3.5")
@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" module>
 .stroke
   fill transparent
 .base

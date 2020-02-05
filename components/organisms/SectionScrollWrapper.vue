@@ -1,9 +1,9 @@
 <template lang="pug">
-  main
-    .wrapper(:style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}" :class="{ initial: initialLoadingFlag }")
+  main(:class="$style.main")
+    div(:class="$style.wrapper" :style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
       slot
-    SectionScrollNavigation.nav(:anchor-list="anchorList", :active-section-index='activeSectionIndex')
-    SectionScrollCounter.counter(:active-section-index='activeSectionIndex', :section-number='anchorList.length - 1')
+    SectionScrollNavigation(:class="$style.nav" :anchor-list="anchorList", :active-section-index="activeSectionIndex", :direction-row="queryMatches" @changeIndex="changeIndex")
+    SectionScrollCounter(:class="[$style.counter, { [$style.initial]: initialLoadingFlag }]" :active-section-index='activeSectionIndex', :section-number='anchorList.length - 1')
 </template>
 
 <script>
@@ -31,7 +31,9 @@ export default {
       prevTime: '',
       prevDelta: '',
       anchorListState: '',
-      initialLoadingFlag: true
+      initialLoadingFlag: true,
+      matchMedia: {},
+      queryMatches: ''
     }
   },
   watch: {
@@ -68,6 +70,16 @@ export default {
 
     this.prevTime = new Date().getTime()
     this.initialLoading()
+
+    this.$nextTick(() => {
+      const querySizes = [this.$style.small, this.$style.middle]
+
+      querySizes.forEach((querySize, index) => {
+        this.matchMedia[index] = window.matchMedia(querySize)
+        this.matchMedia[index].addListener(this.checkNavigationRotation)
+        this.checkNavigationRotation(this.matchMedia[index])
+      })
+    })
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
@@ -124,23 +136,45 @@ export default {
         this.initialLoadingFlag = false
       }).exec()
     },
-    async scrollUp () {
+    async scrollUp (index) {
       if (this.activeSectionIndex > 0) {
         this.$emit('animationReverse', this.activeSectionIndex)
-        this.activeSectionIndex--
+        if (index) {
+          this.activeSectionIndex = index
+        } else {
+          this.activeSectionIndex--
+        }
 
         await this.$delay(1200, () => {
           this.$emit('animationPlay', this.activeSectionIndex)
         }).exec()
       }
     },
-    async scrollDown () {
-      this.$emit('animationReverse', this.activeSectionIndex)
-      this.activeSectionIndex++
+    async scrollDown (index) {
+      if (this.activeSectionIndex < this.anchorListState.length - 1) {
+        this.$emit('animationReverse', this.activeSectionIndex)
+        if (index) {
+          this.activeSectionIndex = index
+        } else {
+          this.activeSectionIndex++
+        }
 
-      await this.$delay(1200, () => {
-        this.$emit('animationPlay', this.activeSectionIndex)
-      }).exec()
+        await this.$delay(1200, () => {
+          this.$emit('animationPlay', this.activeSectionIndex)
+        }).exec()
+      }
+    },
+    checkNavigationRotation () {
+      this.queryMatches = Object.entries(this.matchMedia)
+        .map(([key, value]) => (value))
+        .some(query => query.matches)
+    },
+    changeIndex (index) {
+      if (this.activeSectionIndex > index) {
+        this.scrollUp(index)
+      } else {
+        this.scrollDown(index)
+      }
     }
   }
 }
@@ -153,15 +187,15 @@ export default {
     height 100%
 </style>
 
-<style lang="stylus" scoped>
-  main
+<style lang="stylus" module>
+  .main
     position fixed
     top 0
     left 0
     height 100vh
-  section
-    height 100vh
-    width 100vw
+    section
+      height 100vh
+      width 100vw
 
   .wrapper
     height 100vh
@@ -171,9 +205,15 @@ export default {
   .nav
     position fixed
     left 0
-    top: 50%
-    margin-left 22px
-    transform translateY(-50%)
+    bottom: 50%
+    transform translateY(50%)
+    +breakpoint(middle small)
+      left auto
+      right 15%
+      bottom 0
+      transform translateY(0)
+    +breakpoint(small)
+      right 20%
   .counter
     position fixed
     bottom 2.5%

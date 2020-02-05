@@ -1,8 +1,8 @@
 <template lang="pug">
   .wrapper
-    DonutChart.graph(ref="html" text="HTML" :percent="80")
-    DonutChart.graph(ref="css" text="CSS" :percent="80")
-    DonutChart.graph(ref="js" text="JavaScript" :percent="70")
+    DonutChart(:class="$style.graph" ref="html" text="HTML" :percent="80")
+    DonutChart(:class="$style.graph" ref="css" text="CSS" :percent="80")
+    DonutChart(:class="$style.graph" ref="js" text="JavaScript" :percent="70")
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" module>
 .graph
   width 30%
   &:not(:last-child)

@@ -1,0 +1,22 @@
+/*---------------------------------------------
+* breakpoints
+*---------------------------------------------*/
+@value small: (max-width: 559px)
+@value middle: (min-width: 560px) \and (max-width: 959px)
+@value large: (min-width: 960px)
+@value landscape: (orientation: landscape) \and (max-height: 559px)
+
+breakpoint(mq)
+  for name in mq
+    if name == 'small'
+      @media small
+        {block}
+    if name == 'middle'
+      @media middle
+        {block}
+    if name == 'large'
+      @media large
+        {block}
+    if name == 'landscape'
+      @media landscape
+        {block}

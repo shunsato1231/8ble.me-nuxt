@@ -1,5 +1,5 @@
 <template lang="pug">
-article
+article(:class="$style.article")
   header
     ul
       li(v-for = "tag in post.tags")
@@ -7,10 +7,10 @@ article
         span {{tag}}
     figure(v-if="post.thumbnail")
       img(:src="post.thumbnail")
-    .category
+    div(:class="$style.category")
       i(class="fas fa-folder" style="margin-right: 5px")
       span {{post.category}}
-  .body
+  div(:class="$style.body")
     h1 {{post.title}}
     div {{post.description}}
   footer
@@ -35,13 +35,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import "../style/_mixins.styl"
-
-a:hover
-    text-decoration none
-
-article
+<style lang="stylus" module>
+.article
   position relative
   width 280px
   height 380px
@@ -49,8 +44,6 @@ article
   border-radius 5px
   margin 30px
   font-weight normal
-  +breakpoint('small')
-    margin 30px 0 0
 
   &::before
     position absolute
@@ -91,26 +84,45 @@ article
     &::after
       opacity 0.6
 
-header
-  position relative
-  height 200px
-  color #fff
-  background #000
-  border-radius 5px 5px 0 0
+  header
+    position relative
+    height 200px
+    color #fff
+    background #000
+    border-radius 5px 5px 0 0
 
-figure
-  overflow hidden
-  position absolute
-  right 15px
-  top 15px
-  width 120px
-  height 120px
-  border-radius 50%
-  border 3px solid #fff
-
-  img
+  figure
+    overflow hidden
+    position absolute
+    right 15px
+    top 15px
     width 120px
     height 120px
+    border-radius 50%
+    border 3px solid #fff
+
+    img
+      width 120px
+      height 120px
+  ul
+    position absolute
+    top 15px
+    left 15px
+    font-size(16px)
+    li
+      i
+        vertical-align middle
+        font-size(14px)
+        margin-right 5px
+
+  footer
+    border-top 1px solid #ddd
+    height 25px
+    line-height 25px
+    padding 0 10px
+    color #a2a2a2
+    span
+      margin-right 5px
 
 .category
   position absolute
@@ -126,17 +138,6 @@ figure
   i
     margin-right 5px
 
-ul
-  position absolute
-  top 15px
-  left 15px
-  font-size(16px)
-  li
-    i
-      vertical-align middle
-      font-size(14px)
-      margin-right 5px
-
 .body
   height 150px
   margin-bottom 5px
@@ -147,18 +148,9 @@ ul
     font-weight 400
     padding 0 15px
   div
-    margin 10px
+    margin 15px
     font-size(14px)
     color #888
     background linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f1f1f1 50%, #f1f1f1 100%)
     overflow-wrap break-word
-
-footer
-  border-top 1px solid #ddd
-  height 25px
-  line-height 25px
-  padding 0 10px
-  color #a2a2a2
-  span
-    margin-right 5px;
 </style>

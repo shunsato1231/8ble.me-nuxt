@@ -1,6 +1,6 @@
 <template lang="pug">
-  .wrapper
-    span.str(:style="{borderColor: caretColor}" :class="{caret: caretFlag}") {{displayText}}
+  div(:class="$style.wrapper")
+    span(:class="[{[$style.caret]: caretFlag}, $style.str]" :style="{borderColor: caretColor}") {{displayText}}
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" module>
   .wrapper
     display table
     position relative

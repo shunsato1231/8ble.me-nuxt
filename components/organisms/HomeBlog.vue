@@ -1,11 +1,11 @@
 <template lang="pug">
-  section
+  section(:class="$style.wrapper")
     HomeSectionHeading(ref="mainHeading") Blog
-    .wrapper
+    div(:class='$style.articleWrapper')
       template(v-for="post in posts")
         Article.article(:post="post" ref="article")
 
-    SlotAnimationButton.moreButton(ref="moreButton")(:text="'More'", href="hoge")
+    SlotAnimationButton(:class="$style.moreButton" ref="moreButton")(:text="'More'", href="hoge")
 
 </template>
 
@@ -41,16 +41,18 @@ export default {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
       const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
+      const articles = this.$refs.article.map(component => component.$el)
+
       this.animation = gsap.timeline({ paused: true })
-      this.animation.fromTo('h1 span',
+      this.animation.fromTo(this.$refs.mainHeading.$refs.text,
         { y: mainHeadingHeight, opacity: 0 },
         { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
-        .fromTo('.article',
+        .fromTo(articles,
           { opacity: 0, y: -30 },
           { opacity: 1, y: 0, duration: 1, stagger: 0.4 },
           '-=1'
         )
-        .fromTo('.moreButton', { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
+        .fromTo(this.$refs.moreButton.$el, { x: moreButtonTranslateWidth, opacity: 0 }, { x: 0, opacity: 1, duration: 0.1 }, '-=1.5')
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
@@ -59,23 +61,18 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-section
+<style lang="stylus" module>
+.wrapper
   display flex
   flex-direction column
   justify-content center
   .moreButton
     margin 50px 0 0 auto
     opacity 0
-  .wrapper
+  .articleWrapper
     padding: 0;
     display flex
     flex-flow row wrap
     margin 0 auto
-    +breakpoint('small')
-      width 280px
-    +breakpoint('middle')
-      width 680px
-    +breakpoint('large')
-      width 1020px
+    width 1020px
 </style>

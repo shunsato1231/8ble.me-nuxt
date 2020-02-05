@@ -1,17 +1,11 @@
 <template lang="pug">
-  h2
+  h2(:class="$style.heading")
     slot
-    .border
+    div(:class="$style.border" ref="border")
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
-<style lang="stylus" scoped>
-h2
+<style lang="stylus" module>
+.heading
   position relative
   font-size(22px)
   font-weight 700

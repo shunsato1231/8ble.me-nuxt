@@ -1,7 +1,7 @@
 <template lang="pug">
-  section
+  section(:class="$style.wrapper")
     HomeSectionHeading(ref="mainHeading") Contact
-    .wrapper
+    div(:class="$style.iconWrapper")
       i(class="fab fa-github")
       i(class="fab fa-facebook-f")
       i(class="fas fa-envelope")
@@ -31,7 +31,7 @@ export default {
       const mainHeadingHeight = this.$refs.mainHeading.$el.clientHeight
 
       this.animation = gsap.timeline({ paused: true })
-      this.animation.fromTo('h1 span',
+      this.animation.fromTo(this.$refs.mainHeading.$refs.text,
         { y: mainHeadingHeight, opacity: 0 },
         { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
         .fromTo('.fa-github',
@@ -57,15 +57,12 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-section
+<style lang="stylus" module>
+.wrapper
   display flex
   flex-direction column
   justify-content center
-  .moreButton
-    margin 50px 0 0 auto
-    opacity 0
-  .wrapper
+  .iconWrapper
     display flex
     justify-content center
     padding 10% 0

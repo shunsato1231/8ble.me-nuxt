@@ -1,7 +1,7 @@
 <template lang="pug">
-  ul
+  ul(:class="[$style.nav, { [$style.flex]: directionRow }]")
     li(v-for="(anchor, index) in anchorList" :key="index")
-      nuxt-link(:to="{hash: anchor}" :class="{'active': activeSectionIndex == index}") {{index}}
+      span(@click="changeIndex(index)" :class="{[$style.active]: activeSectionIndex == index}") {{index}}
 </template>
 
 <script>
@@ -14,20 +14,35 @@ export default {
     activeSectionIndex: {
       type: Number,
       required: true
+    },
+    directionRow: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
+  methods: {
+    changeIndex (index) {
+      this.$emit('changeIndex', index)
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-  li
+<style lang="stylus" module>
+  .nav
     text-align center
     font-family 'Rajdhani', sans-serif
-    a
+    margin-left 22px
+    span
+      transition .5s
       color #ccc
       font-weight 400
       font-size(20px)
+      +breakpoint(small)
+        font-size(15px)
       &:hover
+        cursor pointer
         text-decoration none
         color #000
         font-size(30px)
@@ -39,6 +54,8 @@ export default {
       font-size(30px)
       font-weight 600
       color #000
+      +breakpoint(small)
+        font-size(25px)
       &::before
         position absolute
         content ''
@@ -48,4 +65,33 @@ export default {
         background #000
         left -22px
         top 50%
+  .flex
+    display flex
+    justify-content center
+    align-items flex-end
+    margin-left 0
+    margin-bottom 10px
+    li
+      +breakpoint(middle)
+        margin-left 60px
+      +breakpoint(small)
+        margin-left 30px
+      &:nth-child(2)
+        span
+          padding-right 1px
+    .active
+      margin-bottom 10px
+      +breakpoint(small)
+        margin-bottom 5px
+      &::before
+        content ''
+        width 2px
+        transform translateX(-50%)
+        top auto
+        left 50%
+        height 30px
+        bottom -20px
+        +breakpoint(small)
+          height 20px
+          bottom -15px
 </style>
