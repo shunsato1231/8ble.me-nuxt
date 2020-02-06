@@ -15,7 +15,6 @@ export default {
   font-size(40px)
   font-weight 800
   font-family 'Rajdhani', sans-serif
-  margin-bottom 50px
   text-align center
   overflow hidden
   .text

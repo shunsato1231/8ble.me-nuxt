@@ -1,9 +1,9 @@
 <template lang="pug">
   main(:class="$style.main")
-    div(:class="$style.wrapper" :style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
+    div(:class="[$style.wrapper, { [$style.initial]: initialLoadingFlag }]" :style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
       slot
     SectionScrollNavigation(:class="$style.nav" :anchor-list="anchorList", :active-section-index="activeSectionIndex", :direction-row="queryMatches" @changeIndex="changeIndex")
-    SectionScrollCounter(:class="[$style.counter, { [$style.initial]: initialLoadingFlag }]" :active-section-index='activeSectionIndex', :section-number='anchorList.length - 1')
+    SectionScrollCounter(:class="$style.counter" :active-section-index='activeSectionIndex', :section-number='anchorList.length - 1')
 </template>
 
 <script>
@@ -201,7 +201,7 @@ export default {
     height 100vh
     touch-action none
     position relative
-    transition all 700ms ease 1000ms;
+    transition all 700ms ease 1000ms
   .nav
     position fixed
     left 0

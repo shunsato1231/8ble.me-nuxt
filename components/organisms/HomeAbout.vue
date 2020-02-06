@@ -1,13 +1,13 @@
 <template lang="pug">
   section(:class="$style.wrapper")
-    HomeSectionHeading(ref="mainHeading") About
+    HomeSectionHeading(:class="$style.mainHeading" ref="mainHeading") About
     div(:class="$style.contentWrapper")
       div(:class="$style.profile")
         HomeSectionContentHeading(ref="contentHeading_1") Profile
         div(:class="$style.textWrapper" ref="textWrapper_1")
           | ProfileTextProfileTextProfileText
           HomeSectionContentSubHeading Skill
-          HomeSkillGraphs.graphs
+          HomeSkillGraphs(:class="$style.graphs")
       div(:class="$style.personalData")
         HomeSectionContentHeading(ref="contentHeading_2") PersonalData
         div(:class="$style.textWrapper" ref="textWrapper_2")
@@ -54,7 +54,7 @@ export default {
       const moreButtonTranslateWidth = window.innerWidth - (window.pageXOffset + this.$refs.moreButton.$el.getBoundingClientRect().left)
 
       const contentHeadings = [this.$refs.contentHeading_1.$el, this.$refs.contentHeading_2.$el]
-      const contentHeadingsBorder = [this.$refs.contentHeading_1.$refs.border, this.$refs.contentHeading_1.$refs.border]
+      const contentHeadingsBorder = [this.$refs.contentHeading_1.$refs.border, this.$refs.contentHeading_2.$refs.border]
 
       const textWrappers = [this.$refs.textWrapper_1, this.$refs.textWrapper_2]
 
@@ -79,13 +79,21 @@ export default {
   display flex
   flex-direction column
   justify-content center
+  .mainHeading
+    +breakpoint(large)
+      margin-bottom 100px
+    +breakpoint(middle)
+      margin-bottom 50px
+    +breakpoint(small)
+      margin-bottom 20px
   .contentWrapper
-    display flex
-    justify-content space-between
-    .profile
-      width 55%
-    .personalData
-      width 40%
+    +breakpoint(large)
+      display flex
+      justify-content space-between
+      .profile
+        width 55%
+      .personalData
+        width 40%
     .textWrapper
       padding 15px 20px
       font-size(14px)
@@ -104,6 +112,8 @@ export default {
         background #000
   .moreButton
     margin 50px 0 0 auto
+    +breakpoint(small)
+      margin 10px 0 45px auto
     opacity 0
   .graphs
     max-width 450px
