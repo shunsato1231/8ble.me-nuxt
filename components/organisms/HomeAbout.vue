@@ -7,7 +7,7 @@
         div(:class="$style.textWrapper" ref="textWrapper_1")
           | ProfileTextProfileTextProfileText
           HomeSectionContentSubHeading Skill
-          HomeSkillGraphs(:class="$style.graphs")
+          HomeSkillGraphs(:class="$style.graphs" v-if="graphDisplay")
       div(:class="$style.personalData")
         HomeSectionContentHeading(ref="contentHeading_2") PersonalData
         div(:class="$style.textWrapper" ref="textWrapper_2")
@@ -42,7 +42,8 @@ export default {
   },
   data () {
     return {
-      animation: ''
+      animation: '',
+      graphDisplay: false
     }
   },
   mounted () {
@@ -59,9 +60,13 @@ export default {
       const textWrappers = [this.$refs.textWrapper_1, this.$refs.textWrapper_2]
 
       this.animation = gsap.timeline({ paused: true })
-      this.animation.fromTo(this.$refs.mainHeading.$refs.text,
-        { y: mainHeadingHeight, opacity: 0 },
-        { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
+      this.animation
+        .add(() => {
+          this.graphDisplay = !this.graphDisplay
+        })
+        .fromTo(this.$refs.mainHeading.$refs.text,
+          { y: mainHeadingHeight, opacity: 0 },
+          { y: 0, opacity: 1, ease: 'Bounce.easeOut', duration: 2 })
         .fromTo(contentHeadings, { opacity: 0 }, { opacity: 1, duration: 2 }, '-=2')
         .fromTo(contentHeadingsBorder, { width: 0 }, { width: '100%', ease: 'Power4.easeInOut', duration: 1.5 }, '-=2')
         .fromTo(textWrappers, { opacity: 0 }, { opacity: 1, duration: 2 }, '-=1.5')

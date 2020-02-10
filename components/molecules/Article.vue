@@ -1,5 +1,5 @@
 <template lang="pug">
-article(:class="$style.article")
+article(:class="$style.article" @click="link")
   header
     ul
       li(v-for = "tag in post.tags")
@@ -19,6 +19,8 @@ article(:class="$style.article")
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   components: {
   },
@@ -28,8 +30,14 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
+  methods: {
+    link () {
+      const m = moment(this.post.created_at, 'YYYYMMDD')
+      const year = m.format('YYYY')
+      const month = m.format('MM')
+      const url = 'blog/' + year + '/' + month + '/' + this.post.slug
+
+      this.$router.push(url)
     }
   }
 }
@@ -37,12 +45,12 @@ export default {
 
 <style lang="stylus" module>
 .article
+  cursor pointer
   position relative
-  width 280px
-  height 380px
+  width 270px
+  height 375px
   background #f1f1f1
   border-radius 5px
-  margin 30px
   font-weight normal
 
   &::before
@@ -66,8 +74,8 @@ export default {
   &::after
     position absolute
     content ''
-    width 280px
-    height 380px
+    width 100%
+    height 100%
     background-color #000
     border-radius 5px
     opacity 0
@@ -116,7 +124,11 @@ export default {
         margin-right 5px
 
   footer
+    position absolute
+    bottom 0
+    left 0
     border-top 1px solid #ddd
+    width 100%
     height 25px
     line-height 25px
     padding 0 10px
@@ -139,18 +151,22 @@ export default {
     margin-right 5px
 
 .body
+  position relative
   height 150px
-  margin-bottom 5px
-  overflow hidden
+  margin 0 10px
   h1
-    margin-top 10px
     font-size(18px)
+    height 35px
+    line-height 35px
     font-weight 400
-    padding 0 15px
   div
-    margin 15px
+    display -webkit-box
+    overflow hidden
+    -webkit-line-clamp 5
+    -webkit-box-orient vertical
+    height 110px
+    line-height 22px /** 110 / 5 = 22**/
     font-size(14px)
     color #888
-    background linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f1f1f1 50%, #f1f1f1 100%)
     overflow-wrap break-word
 </style>
