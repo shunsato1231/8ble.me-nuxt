@@ -40,8 +40,6 @@ export default {
   },
   methods: {
     createAnimation () {
-      console.log(this.$refs.scrollDownBar)
-
       this.animation = gsap.timeline({ paused: true, onReverseComplete: this.reverseFunction })
       this.animation.add(this.animateTitle)
         .fromTo(this.$refs.typing.$el, { opacity: 0 }, { opacity: 1, duration: 2 }, '+=2')

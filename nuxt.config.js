@@ -11,7 +11,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: "stylesheet", href: "https://use.fontawesome.com/releases/v5.8.2/css/all.css" }
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css' }
     ]
   },
   buildModules: [
@@ -42,17 +42,12 @@ export default {
   plugins: [
     '@/plugins/mixins',
     '@/plugins/filter'
-  ] ,
+  ],
   router: {
     extendRoutes (routes, resolve) {
       routes.unshift({
         path: '/blog/page/:id',
         component: resolve(__dirname, 'pages/blog/index.vue')
-      })
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/404.vue')
       })
     }
   }
