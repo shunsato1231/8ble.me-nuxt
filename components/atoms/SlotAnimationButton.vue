@@ -48,7 +48,7 @@ export default {
     this.animation.staggerFromTo(this.$refs.str, 0.2,
       { color: '#000' },
       { color: '#fff', rotationX: 360 },
-      0.1,
+      0.05,
       '#start'
     )
   },

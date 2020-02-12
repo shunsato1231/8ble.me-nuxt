@@ -35,7 +35,7 @@ export default {
       const m = moment(this.post.created_at, 'YYYYMMDD')
       const year = m.format('YYYY')
       const month = m.format('MM')
-      const url = 'blog/' + year + '/' + month + '/' + this.post.slug
+      const url = '/blog/' + year + '/' + month + '/' + this.post.slug
 
       this.$router.push(url)
     }

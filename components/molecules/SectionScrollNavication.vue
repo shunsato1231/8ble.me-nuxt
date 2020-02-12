@@ -1,7 +1,7 @@
 <template lang="pug">
   ul(:class="[$style.nav, { [$style.flex]: directionRow }]")
     li(v-for="(anchor, index) in anchorList" :key="index")
-      span(@click="changeIndex(index)" :class="{[$style.active]: activeSectionIndex == index}") {{index}}
+      nuxt-link(:to="anchor" :class="{[$style.active]: activeSectionIndex == index}") {{index}}
 </template>
 
 <script>
@@ -20,11 +20,6 @@ export default {
       required: false,
       default: false
     }
-  },
-  methods: {
-    changeIndex (index) {
-      this.$emit('changeIndex', index)
-    }
   }
 }
 </script>
@@ -34,7 +29,7 @@ export default {
     text-align center
     font-family 'Rajdhani', sans-serif
     margin-left 22px
-    span
+    a
       transition .5s
       color #ccc
       font-weight 400
@@ -77,7 +72,7 @@ export default {
       +breakpoint(small)
         margin-left 30px
       &:nth-child(2)
-        span
+        a
           padding-right 1px
     .active
       margin-bottom 10px

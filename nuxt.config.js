@@ -42,5 +42,18 @@ export default {
   plugins: [
     '@/plugins/mixins',
     '@/plugins/filter'
-  ]
+  ] ,
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.unshift({
+        path: '/blog/page/:id',
+        component: resolve(__dirname, 'pages/blog/index.vue')
+      })
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
+  }
 }

@@ -1,7 +1,7 @@
 {
-  "title": "fugo",
+  "title": "popo",
   "created_at": "2020-01-22T00:00:00.000Z",
-  "slug": "fugo",
+  "slug": "popo",
   "thumbnail": "/blog/2020/01/22/thumb.png",
   "category": "tech",
   "tags": [
@@ -14,8 +14,8 @@
   "bodyContent": "# hoge\n## ふご\n\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。",
   "bodyHtml": "<h1>hoge</h1>\n<h2>ふご</h2>\n<p>本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。</p>\n",
   "dir": "contents/blog/json",
-  "base": "2020-01-fugo.json",
+  "base": "2020-01-popo.json",
   "ext": ".json",
-  "sourceBase": "2020-01-fugo.md",
+  "sourceBase": "2020-01-popo.md",
   "sourceExt": ".md"
 }

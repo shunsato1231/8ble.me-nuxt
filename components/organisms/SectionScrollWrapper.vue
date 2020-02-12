@@ -1,9 +1,9 @@
 <template lang="pug">
   main(:class="$style.main")
-    div(:class="[$style.wrapper, { [$style.initial]: initialLoadingFlag }]" :style="{transform: ' translate3d(0px,' + activeSectionIndex * windowHeight * -1 +'px, 0px)'}")
+    div(:class="[$style.wrapper, { [$style.initial]: initialLoadingFlag }]" :style="{transform: ' translate3d(0px,' + animationSectionIndex * windowHeight * -1 +'px, 0px)'}")
       slot
-    SectionScrollNavigation(:class="$style.nav" :anchor-list="anchorList", :active-section-index="activeSectionIndex", :direction-row="queryMatches" @changeIndex="changeIndex")
-    SectionScrollCounter(:class="$style.counter" :active-section-index='activeSectionIndex', :section-number='anchorList.length - 1')
+    SectionScrollNavigation(:class="$style.nav" :anchor-list="anchorList", :active-section-index="animationSectionIndex", :direction-row="queryMatches")
+    SectionScrollCounter(:class="$style.counter" :active-section-index='animationSectionIndex', :section-number='anchorList.length - 1')
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
     return {
       mousewheelevent: '',
       activeSectionIndex: 0,
-      prevActiveSectionIndex: 0,
+      animationSectionIndex: 0,
       windowHeight: '',
       prevTime: '',
       prevDelta: '',
@@ -40,8 +40,15 @@ export default {
     '$route' (to, from) {
       if (to.hash !== from.hash) {
         const self = this
-        const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === to.hash })
-        this.activeSectionIndex = index
+        const toIndex = _.findIndex(self.anchorListState, function (anchor) { return anchor === to.hash })
+        const fromIndex = _.findIndex(self.anchorListState, function (anchor) { return anchor === from.hash })
+        this.activeSectionIndex = toIndex
+
+        if (toIndex < fromIndex) {
+          this.scrollUp(toIndex)
+        } else {
+          this.scrollDown(toIndex)
+        }
       }
     },
     anchorList (value) {
@@ -50,14 +57,13 @@ export default {
       const self = this
       const index = _.findIndex(self.anchorListState, function (anchor) { return anchor === self.$route.hash })
       this.activeSectionIndex = index
+      this.animationSectionIndex = index
     },
     activeSectionIndex (index, prevIndex) {
       const toHash = this.anchorListState[index]
       if (toHash !== this.$route.hash && !this.initialLoadingFlag) {
         this.$router.push({ hash: toHash })
       }
-
-      this.prevActiveSectionIndex = index
     }
   },
   mounted () {
@@ -103,10 +109,10 @@ export default {
         curTime = e.timeStamp
 
         if (!isFired && curTime - this.prevTime > 250) {
-          if (e.deltaY < 0) {
-            this.scrollUp()
-          } else {
-            this.scrollDown()
+          if (e.deltaY < 0 && this.activeSectionIndex > 0) {
+            this.activeSectionIndex--
+          } else if (this.activeSectionIndex < this.anchorListState.length - 1) {
+            this.activeSectionIndex++
           }
 
           isFired = true
@@ -122,10 +128,14 @@ export default {
     handleKeydown (e) {
       switch (e.key) {
         case 'ArrowUp':
-          this.scrollUp()
+          if (this.activeSectionIndex > 0) {
+            this.activeSectionIndex--
+          }
           break
         case 'ArrowDown':
-          this.scrollDown()
+          if (this.activeSectionIndex < this.anchorListState.length - 1) {
+            this.activeSectionIndex++
+          }
           break
         default:
           break
@@ -137,30 +147,30 @@ export default {
       }).exec()
     },
     async scrollUp (index) {
-      if (this.activeSectionIndex > 0) {
-        this.$emit('animationReverse', this.activeSectionIndex)
+      if (this.animationSectionIndex > 0) {
+        this.$emit('animationReverse', this.animationSectionIndex)
         if (index) {
-          this.activeSectionIndex = index
+          this.animationSectionIndex = index
         } else {
-          this.activeSectionIndex--
+          this.animationSectionIndex--
         }
 
         await this.$delay(1200, () => {
-          this.$emit('animationPlay', this.activeSectionIndex)
+          this.$emit('animationPlay', this.animationSectionIndex)
         }).exec()
       }
     },
     async scrollDown (index) {
-      if (this.activeSectionIndex < this.anchorListState.length - 1) {
-        this.$emit('animationReverse', this.activeSectionIndex)
+      if (this.animationSectionIndex < this.anchorListState.length - 1) {
+        this.$emit('animationReverse', this.animationSectionIndex)
         if (index) {
-          this.activeSectionIndex = index
+          this.animationSectionIndex = index
         } else {
-          this.activeSectionIndex++
+          this.animationSectionIndex++
         }
 
         await this.$delay(1200, () => {
-          this.$emit('animationPlay', this.activeSectionIndex)
+          this.$emit('animationPlay', this.animationSectionIndex)
         }).exec()
       }
     },
@@ -168,13 +178,6 @@ export default {
       this.queryMatches = Object.entries(this.matchMedia)
         .map(([key, value]) => (value))
         .some(query => query.matches)
-    },
-    changeIndex (index) {
-      if (this.activeSectionIndex > index) {
-        this.scrollUp(index)
-      } else {
-        this.scrollDown(index)
-      }
     }
   }
 }
