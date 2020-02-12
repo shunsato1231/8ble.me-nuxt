@@ -3,7 +3,9 @@
     h1(ref="title")
       div(v-for="str in titleSplit" ref="chars") {{str}}
     TypingText(:class="$style.type" @complete="changeText", :text="description" caretColor="#999", ref="typing")
-    div(:class="$style.scrollDown" ref="scrollDown") Scroll Down
+    div(:class="$style.scrollDown" ref="scrollDown")
+      span(ref="scrollDownText") Scroll Down
+      div(:class="$style.bar" ref="scrollDownBar")
 </template>
 
 <script>
@@ -38,11 +40,14 @@ export default {
   },
   methods: {
     createAnimation () {
+      console.log(this.$refs.scrollDownBar)
+
       this.animation = gsap.timeline({ paused: true, onReverseComplete: this.reverseFunction })
       this.animation.add(this.animateTitle)
-        .fromTo(this.$refs.type, { opacity: 0 }, { opacity: 1, duration: 1 }, '+=2')
+        .fromTo(this.$refs.typing.$el, { opacity: 0 }, { opacity: 1, duration: 2 }, '+=2')
         .add(this.animateTyping, 2)
-        .fromTo(this.$refs.scrollDown, { opacity: 0 }, { opacity: 1, duration: 1 })
+        .fromTo(this.$refs.scrollDownBar, { height: 0 }, { height: 100, duration: 0.5 }, '-=1.8')
+        .fromTo(this.$refs.scrollDownText, { opacity: 0 }, { opacity: 1, duration: 1 }, '-=1')
     },
     animationReverse () {
       this.animation.timeScale(2).reverse()
@@ -119,21 +124,20 @@ export default {
     color #999
   .scrollDown
     position fixed
-    left 2%
+    left 3%
     bottom 0
     writing-mode: vertical-lr;
-    font-size 1.2vw
+    font-size(18px)
     font-family 'Rajdhani', sans-serif
     font-weight 400
-    margin-bottom 105px
-    &:after
-      background #000
-      position absolute
-      display block
-      content ''
-      width 2px
-      height 100px
-      left 50%
-      transform translateX(-50%)
-      bottom -105px
+    padding-bottom 110px
+  .bar
+    background #000
+    position absolute
+    display block
+    content ''
+    width 2px
+    height 100px
+    left 10px
+    bottom 0
 </style>
