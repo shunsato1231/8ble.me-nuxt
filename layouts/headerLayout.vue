@@ -1,23 +1,24 @@
 <template lang="pug">
   main
     Header
-    //- Sidebar
-    div(:class="[$style.wrapper, {[$style.transition]: transition}]")
+    Sidebar(@toggleSidebar="changeToggle")
+    div(:class="[$style.wrapper, {[$style.transition]: transition}, {[$style.translate]: stateToggle}]")
       nuxt
 </template>
 
 <script>
 import Header from '../components/organisms/Header'
-// import Sidebar from '../components/organisms/Sidebar'
+import Sidebar from '../components/organisms/Sidebar'
 
 export default {
   components: {
-    Header
-    // Sidebar
+    Header,
+    Sidebar
   },
   data () {
     return {
-      transition: false
+      transition: false,
+      stateToggle: ''
     }
   },
   created () {
@@ -30,6 +31,11 @@ export default {
     initial.then(() => {
       this.transition = true
     })
+  },
+  methods: {
+    changeToggle (flag) {
+      this.stateToggle = flag
+    }
   }
 }
 </script>

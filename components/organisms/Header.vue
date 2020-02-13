@@ -1,9 +1,9 @@
 <template lang="pug">
-  header
-    .inner
-      .loadingbar(:style="{width: loadWidth + '%'}" :class="{transition: transition}")
-      .toTop(:class="{hover: hover}" @mouseover="hoverToTop", @mouseleave="hover = false" @click="toTop")
-      h1
+  header(:class="$style.header")
+    div(:class="$style.inner")
+      div(:style="{width: loadWidth + '%'}" :class="[$style.loadingbar, {[$style.transition]: transition}]")
+      div(:class="[$style.toTop, {[$style.hover]: hover}]" @mouseover="hoverToTop", @mouseleave="hover = false" @click="toTop")
+      h1(:class="$style.title")
         router-link(to="/") hoge
 </template>
 
@@ -34,7 +34,10 @@ export default {
       let loadCounter = 0
       const imgList = document.images
       const imgLenght = document.images.length
-      this.loadCount = function () { loadCounter++ }
+
+      this.loadCount = () => {
+        loadCounter++
+      }
 
       for (let count = 0; count < imgLenght; count++) {
         imgList[count].addEventListener('load', this.loadCount)
@@ -97,8 +100,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-  header
+<style lang="stylus" module>
+  .header
     width 100%
     height 65px
     background-color rgba(255, 255, 255, 0.9)
@@ -112,7 +115,7 @@ export default {
     width 90%
     margin 0 auto
 
-  h1
+  .title
     text-align left
     height 45px
     width 100px

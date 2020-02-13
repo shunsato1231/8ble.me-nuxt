@@ -183,13 +183,6 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  body
-    overflow hidden
-  #app
-    height 100%
-</style>
-
 <style lang="stylus" module>
   .main
     position fixed

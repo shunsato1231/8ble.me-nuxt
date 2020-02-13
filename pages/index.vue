@@ -1,9 +1,9 @@
 <template lang="pug">
   SectionScrollWrapper(:anchorList="anchorList" @animationPlay="animationPlay", @animationReverse="animationReverse")
-    Home(ref="home")
-    HomeAbout(ref="about")
-    HomeBlog(ref="blog" :posts="posts")
-    HomeContact(ref="contact")
+    Home(ref="home" class="$style.section")
+    HomeAbout(ref="about" :class="$style.section")
+    HomeBlog(ref="blog" :posts="posts" :class="$style.section")
+    HomeContact(ref="contact" :class="$style.section")
 
 </template>
 
@@ -17,6 +17,13 @@ import HomeBlog from '../components/organisms/HomeBlog.vue'
 import HomeContact from '../components/organisms/HomeContact.vue'
 
 export default {
+  head () {
+    return {
+      bodyAttrs: {
+        class: 'noScroll'
+      }
+    }
+  },
   components: {
     SectionScrollWrapper,
     Home,
@@ -67,8 +74,8 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  section
+<style lang="stylus" module>
+  .section
     width 100vw
     height 100vh
     padding 0 5%

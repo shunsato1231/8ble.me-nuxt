@@ -22,8 +22,6 @@ article(:class="$style.article" @click="link")
 import moment from 'moment'
 
 export default {
-  components: {
-  },
   props: {
     post: {
       type: Object,
