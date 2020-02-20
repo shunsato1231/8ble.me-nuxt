@@ -1,19 +1,24 @@
 <template lang="pug">
   div
+    Archive(:tags="['hoge','hage']", :categories="['hoge','hage']")
     ArticleList(:posts="posts")
     Pagination(:list="articleList", :par="6", :currentIndex="currentIndex" path="/blog/page/" firstPath="/blog/")
 </template>
 
 <script>
 import _ from 'lodash'
+
 import ArticleList from '../../components/organisms/ArticleList.vue'
+import Archive from '../../components/organisms/Archive.vue'
 import Pagination from '../../components/molecules/Pagination.vue'
+
 import { sourceFileArray } from '../../contents/blog/summary.json'
 
 export default {
   layout: 'headerLayout',
   components: {
     ArticleList,
+    Archive,
     Pagination
   },
   data () {

@@ -11,7 +11,9 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "convert-blog": "yarn processmd \"contents/blog/**/*.md\" --stdout --outputDir contents/blog/json --summaryOutput contents/blog/summary.json"
+    "convert-posts": "yarn processmd \"contents/blog/**/*.md\" --stdout --outputDir contents/blog/json --summaryOutput contents/blog/summary.json",
+    "convert-archive": "node convert-archive.js",
+    "convert-blog": "yarn run convert-posts && yarn run convert-archive"
   },
   "dependencies": {
     "gsap": "^3.0.5",

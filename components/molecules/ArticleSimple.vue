@@ -6,9 +6,9 @@ article(:class="$style.article" @click="link")
     h1 {{post.title}}
     div(:class="$style.text") {{post.description}}
     footer
-      div(:class="$style.category") {{post.category}}
+      div(:class="$style.category") {{post.category.name}}
       div(:class="$style.tags")
-        span(v-for = "tag in post.tags") {{tag}}
+        span(v-for = "tag in post.tags") {{tag.name}}
       div(:class="$style.data")
         span posted in
         time(:datetime = "post.date") {{post.created_at | formatDate}}

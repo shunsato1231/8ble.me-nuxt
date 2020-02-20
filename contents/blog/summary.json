@@ -1,16 +1,87 @@
 {
   "fileMap": {
+    "contents/blog/json/2020-01-hyan.json": {
+      "title": "hyan",
+      "created_at": "2020-01-22T00:00:00.000Z",
+      "slug": "hyan",
+      "thumbnail": "/blog/2020/01/22/thumb.png",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
+      "tags": [
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
+      ],
+      "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
+      "dir": "contents/blog/json",
+      "base": "2020-01-hyan.json",
+      "ext": ".json",
+      "sourceBase": "2020-01-hyan.md",
+      "sourceExt": ".md"
+    },
+    "contents/blog/json/2020-01-piyo.json": {
+      "title": "Piyo",
+      "created_at": "2020-01-23T00:00:00.000Z",
+      "slug": "piyo",
+      "thumbnail": "/blog/2020/01/23/thumb.png",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
+      "tags": [
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
+      ],
+      "description": "piyopiyopiyopiyopiyopiyopiyopiyopiyo",
+      "dir": "contents/blog/json",
+      "base": "2020-01-piyo.json",
+      "ext": ".json",
+      "sourceBase": "2020-01-piyo.md",
+      "sourceExt": ".md"
+    },
     "contents/blog/json/2020-01-hoge.json": {
       "title": "hoge",
       "created_at": "2020-01-21T00:00:00.000Z",
       "slug": "hoge",
       "thumbnail": "/blog/2020/01/21/thumb.png",
-      "category": "tech",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
       "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
       ],
       "description": "hogehogehogehogehogehogehogehoge",
       "dir": "contents/blog/json",
@@ -24,12 +95,23 @@
       "created_at": "2020-01-22T00:00:00.000Z",
       "slug": "fugo",
       "thumbnail": "/blog/2020/01/22/thumb.png",
-      "category": "tech",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
       "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "お神輿",
+          "slug": "omikoshi"
+        }
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",
@@ -38,36 +120,28 @@
       "sourceBase": "2020-01-fugo.md",
       "sourceExt": ".md"
     },
-    "contents/blog/json/2020-01-hyan.json": {
-      "title": "hyan",
-      "created_at": "2020-01-22T00:00:00.000Z",
-      "slug": "hyan",
-      "thumbnail": "/blog/2020/01/22/thumb.png",
-      "category": "tech",
-      "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
-      ],
-      "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
-      "dir": "contents/blog/json",
-      "base": "2020-01-hyan.json",
-      "ext": ".json",
-      "sourceBase": "2020-01-hyan.md",
-      "sourceExt": ".md"
-    },
     "contents/blog/json/2020-01-pepe.json": {
       "title": "pepe",
       "created_at": "2020-01-22T00:00:00.000Z",
       "slug": "pepe",
       "thumbnail": "/blog/2020/01/22/thumb.png",
-      "category": "tech",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
       "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",
@@ -76,36 +150,28 @@
       "sourceBase": "2020-01-pepe.md",
       "sourceExt": ".md"
     },
-    "contents/blog/json/2020-01-piyo.json": {
-      "title": "Piyo",
-      "created_at": "2020-01-23T00:00:00.000Z",
-      "slug": "piyo",
-      "thumbnail": "/blog/2020/01/23/thumb.png",
-      "category": "tech",
-      "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
-      ],
-      "description": "piyopiyopiyopiyopiyopiyopiyopiyopiyo",
-      "dir": "contents/blog/json",
-      "base": "2020-01-piyo.json",
-      "ext": ".json",
-      "sourceBase": "2020-01-piyo.md",
-      "sourceExt": ".md"
-    },
     "contents/blog/json/2020-01-popo.json": {
       "title": "popo",
       "created_at": "2020-01-22T00:00:00.000Z",
       "slug": "popo",
       "thumbnail": "/blog/2020/01/22/thumb.png",
-      "category": "tech",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
       "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",
@@ -119,12 +185,23 @@
       "created_at": "2020-02-22T00:00:00.000Z",
       "slug": "fugo",
       "thumbnail": "/blog/2020/01/22/thumb.png",
-      "category": "tech",
+      "category": {
+        "name": "hoge",
+        "slug": "hoge"
+      },
       "tags": [
-        "Nuxt.js",
-        "jade",
-        "gulp",
-        "po"
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",

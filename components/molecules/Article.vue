@@ -4,12 +4,12 @@ article(:class="$style.article" @click="link")
     ul
       li(v-for = "tag in post.tags")
         i(class="fas fa-tag" style="margin-right: 5px")
-        span {{tag}}
+        span {{tag.name}}
     figure(v-if="post.thumbnail")
       img(:src="post.thumbnail")
     div(:class="$style.category")
       i(class="fas fa-folder" style="margin-right: 5px")
-      span {{post.category}}
+      span {{post.category.name}}
   div(:class="$style.body")
     h1 {{post.title}}
     div {{post.description}}

@@ -3,12 +3,23 @@
   "created_at": "2020-01-21T00:00:00.000Z",
   "slug": "hoge",
   "thumbnail": "/blog/2020/01/21/thumb.png",
-  "category": "tech",
+  "category": {
+    "name": "tech",
+    "slug": "tech"
+  },
   "tags": [
-    "Nuxt.js",
-    "jade",
-    "gulp",
-    "po"
+    {
+      "name": "Nuxt.js",
+      "slug": "nuxt-js"
+    },
+    {
+      "name": "jade",
+      "slug": "jade"
+    },
+    {
+      "name": "gulp",
+      "slug": "gulp"
+    }
   ],
   "description": "hogehogehogehogehogehogehogehoge",
   "bodyContent": "# hoge\n## ふが\n\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。\n本文です。本文です。本文です。本文です。本文です。本文です。",
