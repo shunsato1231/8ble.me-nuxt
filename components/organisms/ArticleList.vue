@@ -26,13 +26,15 @@ export default {
   display flex
   flex-flow row wrap
   margin 0 auto
-  @media (min-width: 330px)
-    width 330px
-  @media (min-width: 660px)
+  +breakpoint(small)
+    width 310px
+  +breakpoint(middle)
     width 660px
-  @media (min-width: 990px)
+  +breakpoint(large)
     width 990px
 
 .article
   margin 30px
+  +breakpoint(small)
+    margin 20px
 </style>

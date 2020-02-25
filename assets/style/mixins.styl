@@ -1,21 +1,58 @@
 font-size(value) {
-    font-size: value; 
-    /* add PX (or original value) as backup */
+  font-size: value; 
+  /* add PX (or original value) as backup */
 
-    if (value is inherit) {
-        /* do nothing, "inherit" has no unit */
-    } else {
-        font-size: remify(value);
-    }
+  if (value is inherit) {
+    /* do nothing, "inherit" has no unit */
+  } else {
+    font-size: remify(value);
+  }
 }
 
 remify(value) { 
   /* separate mixin, so it can be used elsewhere */
-    u = unit(value);
+  u = unit(value);
 
-    if (u is 'px') {
-        return unit(value/10, 'rem');
-    } else {
-        return unit(value, u);
+  if (u is 'px') {
+    return unit(value/10, 'rem');
+  } else {
+    return unit(value, u);
+  }
+}
+
+animateShatter() {
+  position relative
+  overflow hidden
+  z-index 2
+  &:before {
+    position absolute
+    transition transform 0.4s
+    left 0
+    top 0
+    content ''
+    width 100%
+    height 100%
+    background rgba(0, 0, 0, 0.6)
+    z-index -1
+    transform translateX(100%)
+  }
+  &:after {
+    position absolute
+    transition transform 0.4s
+    left 0
+    top 0
+    content ''
+    width 100%
+    height 100%
+    background rgba(0, 0, 0, 0.6)
+    z-index -1
+    transform translateX(-100%)
+  }
+  &:hover {
+    color #fff
+    text-decoration none
+    &:before, &:after {
+      transform translateX(0)
     }
+  }
 }

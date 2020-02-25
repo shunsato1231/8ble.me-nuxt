@@ -67,9 +67,9 @@ export default {
   &::after
     position absolute
     content ''
-    width 100%
+    width 0
     background-color #000
-    opacity 0
+    opacity 0.6
     left 0
     +breakpoint(small)
       height 110px
@@ -83,7 +83,7 @@ export default {
     &::before
       opacity 1
     &::after
-      opacity 0.6
+      width 100%
   figure
     img
       +breakpoint(small)

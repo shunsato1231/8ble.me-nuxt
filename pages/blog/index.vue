@@ -1,30 +1,23 @@
 <template lang="pug">
   div
-    Archive(:tags="['hoge','hage']", :categories="['hoge','hage']")
     ArticleList(:posts="posts")
-    Pagination(:list="articleList", :par="6", :currentIndex="currentIndex" path="/blog/page/" firstPath="/blog/")
+    Pagination(:list="paginationList", :par="6", :currentIndex="currentIndex" path="/blog/page/" firstPath="/blog/")
 </template>
 
 <script>
 import _ from 'lodash'
+import { mapActions } from 'vuex'
 
 import ArticleList from '../../components/organisms/ArticleList.vue'
-import Archive from '../../components/organisms/Archive.vue'
 import Pagination from '../../components/molecules/Pagination.vue'
 
-import { sourceFileArray } from '../../contents/blog/summary.json'
+import { sourceFileArray, fileMap } from '../../contents/blog/summary.json'
 
 export default {
-  layout: 'headerLayout',
+  layout: 'baseLayout',
   components: {
     ArticleList,
-    Archive,
     Pagination
-  },
-  data () {
-    return {
-      articleList: []
-    }
   },
   computed: {
     currentIndex () {
@@ -39,12 +32,21 @@ export default {
       index = 1
     }
 
-    const json = require(`~/contents/blog/summary.json`)
-    const posts = _.orderBy(json.fileMap, 'created_at', 'desc').slice((index - 1) * 6, index * 6)
-    return { posts }
+    const posts = _.orderBy(fileMap, 'created_at', 'desc').slice((index - 1) * 6, index * 6)
+    const paginationList = sourceFileArray
+    return { posts, paginationList }
   },
-  created () {
-    this.articleList = sourceFileArray
+  mounted () {
+    this.setHeaderFlag(true)
+    this.setArchiveFlag(true)
+    this.setSidebarFlag(true)
+  },
+  methods: {
+    ...mapActions('baseLayout', [
+      'setHeaderFlag',
+      'setSidebarFlag',
+      'setArchiveFlag'
+    ])
   },
   validate ({ params }) {
     let index

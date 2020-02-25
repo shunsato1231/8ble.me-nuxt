@@ -72,24 +72,23 @@ export default {
   &::after
     position absolute
     content ''
-    width 100%
+    width 0
     height 100%
     background-color #000
     border-radius 5px
-    opacity 0
+    opacity 0.6
     left 0
     top 0
     right 0
     bottom 0
     z-index 98
-    transition 0.5s
+    transition 0.3s
 
   &:hover
     &::before
       opacity 1
     &::after
-      opacity 0.6
-
+      width 100%
   header
     position relative
     height 200px

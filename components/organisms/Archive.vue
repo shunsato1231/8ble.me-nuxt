@@ -6,8 +6,8 @@
         div(:class="$style.bg")
     transition(@before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave")
       ul(:class="[$style.content, $style.categories]" v-if="isActive === 1")
-        li(v-for="category in categories")
-          nuxt-link(:to="category.slug")
+        li(v-for="category in categories" :key="category.slug")
+          nuxt-link(:to="'/blog/category/' + category.slug")
             span(:class="$style.name") {{category.name}}
             span(:class="$style.num") {{category.posts.length}}
 
@@ -18,7 +18,7 @@
     transition(@before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave")
       div(:class="[$style.content, $style.tags]" v-if="isActive === 2")
         div(:class="[$style.wrapper]")
-          nuxt-link(v-for="tag in tags" :to="tag.slug")
+          nuxt-link(v-for="tag in tags" :to="'/blog/tag/' + tag.slug" :key="tag.slug")
             span(:class="$style.name") {{tag.name}}
             span(:class="$style.num") {{tag.posts.length}}
 
@@ -29,7 +29,7 @@
     transition(@before-enter="beforeEnter" @enter="enter" @before-leave="beforeLeave" @leave="leave")
       ul(:class="[$style.content, $style.yearly]" v-if="isActive === 3")
         li(v-for="(posts, year) in yearly")
-          nuxt-link(:to="year")
+          nuxt-link(:to="'/blog/' + year")
             span(:class="$style.name") {{year}}
             span(:class="$style.num") {{posts.length}}
 
@@ -41,7 +41,7 @@
       div(:class="[$style.content, $style.monthly]" v-if="isActive === 4")
         ul(v-for="(monthList, year) in monthly")
           li(v-for="(posts, month) in monthList")
-            nuxt-link(:to="year + '/' + month")
+            nuxt-link(:to="'/blog/' + year + '/' + month")
               span(:class="$style.year") {{year}}
               span(:class="$style.month") {{month}}
 </template>
@@ -75,11 +75,23 @@ export default {
       }
     }
   },
+  watch: {
+    '$route' (to, from) {
+      this.isActive = 0
+    }
+  },
   mounted () {
-    this.tabAlignment()
+    this.$nextTick(() => {
+      const mediaQuery = window.matchMedia(this.$style.small)
+      this.tabAlignment(mediaQuery)
+      mediaQuery.addListener(this.tabAlignment)
+    })
   },
   methods: {
-    tabAlignment () {
+    tabAlignment (mediaQuery) {
+      if (!mediaQuery) {
+        return
+      }
       const tabs = this.$el.getElementsByClassName(this.$style.tab);
       [...tabs].reduce((leftPos, el) => {
         el.style.left = leftPos + 'px'
@@ -137,6 +149,8 @@ export default {
   width 90%
   margin 10px auto
   padding-top 34px
+  +breakpoint(small)
+    padding-top 0
   &:before
     content ''
     position absolute
@@ -168,7 +182,7 @@ export default {
       position relative
       font-size(15px)
       font-weight 500
-      padding 5px 20px 5px 15px
+      padding 5px 15px 5px 5px
       transition 0.3s
       .bg
         content ''
@@ -297,12 +311,15 @@ export default {
       height 45px
       background #f1f1f1
       a
+        animateShatter()
         display block
         width 100%
         height 100%
         padding 5px
         &:hover
           text-decoration none
+          .year
+            color #fff
         .year
           display block
           text-align center
@@ -310,6 +327,7 @@ export default {
           line-height 12px
           font-weight 500
           color #aaa
+          transition 0.3s
         .month
           display block
           text-align center

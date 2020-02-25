@@ -48,7 +48,24 @@ export default {
       routes.unshift({
         path: '/blog/page/:id',
         component: resolve(__dirname, 'pages/blog/index.vue')
-      })
+      },
+      {
+        path: '/blog/category/:slug/page/:id',
+        component: resolve(__dirname, 'pages/blog/category/_slug.vue')
+      },
+      {
+        path: '/blog/tag/:slug/page/:id',
+        component: resolve(__dirname, 'pages/blog/tag/_slug.vue')
+      },
+      {
+        path: '/blog/:year/page/:id',
+        component: resolve(__dirname, 'pages/blog/_year/index.vue')
+      },
+      {
+        path: '/blog/:year/:month/page/:id',
+        component: resolve(__dirname, 'pages/blog/_year/_month/index.vue')
+      }
+      )
     }
   }
 }

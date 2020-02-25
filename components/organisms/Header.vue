@@ -11,7 +11,7 @@
 export default {
   data () {
     return {
-      loadWidth: 0,
+      loadWidth: 100,
       transition: false,
       hover: false,
       loadCount: ''
