@@ -41,7 +41,9 @@ export default {
   },
   plugins: [
     '@/plugins/mixins',
-    '@/plugins/filter'
+    '@/plugins/filter',
+    '@/plugins/markdown-it',
+    '@/plugins/prism'
   ],
   router: {
     extendRoutes (routes, resolve) {

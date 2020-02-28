@@ -1,9 +1,9 @@
 {
   "fileMap": {
-    "contents/blog/json/2020-01-hyan.json": {
-      "title": "hyan",
+    "contents/blog/json/2020-01-pepe.json": {
+      "title": "pepe",
       "created_at": "2020-01-22T00:00:00.000Z",
-      "slug": "hyan",
+      "slug": "pepe",
       "thumbnail": "/blog/2020/01/22/thumb.png",
       "category": {
         "name": "tech",
@@ -25,39 +25,9 @@
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",
-      "base": "2020-01-hyan.json",
+      "base": "2020-01-pepe.json",
       "ext": ".json",
-      "sourceBase": "2020-01-hyan.md",
-      "sourceExt": ".md"
-    },
-    "contents/blog/json/2020-01-piyo.json": {
-      "title": "Piyo",
-      "created_at": "2020-01-23T00:00:00.000Z",
-      "slug": "piyo",
-      "thumbnail": "/blog/2020/01/23/thumb.png",
-      "category": {
-        "name": "tech",
-        "slug": "tech"
-      },
-      "tags": [
-        {
-          "name": "Nuxt.js",
-          "slug": "nuxt-js"
-        },
-        {
-          "name": "jade",
-          "slug": "jade"
-        },
-        {
-          "name": "gulp",
-          "slug": "gulp"
-        }
-      ],
-      "description": "piyopiyopiyopiyopiyopiyopiyopiyopiyo",
-      "dir": "contents/blog/json",
-      "base": "2020-01-piyo.json",
-      "ext": ".json",
-      "sourceBase": "2020-01-piyo.md",
+      "sourceBase": "2020-01-pepe.md",
       "sourceExt": ".md"
     },
     "contents/blog/json/2020-01-hoge.json": {
@@ -90,14 +60,44 @@
       "sourceBase": "2020-01-hoge.md",
       "sourceExt": ".md"
     },
+    "contents/blog/json/2020-01-piyo.json": {
+      "title": "Piyo",
+      "created_at": "2020-01-23T00:00:00.000Z",
+      "slug": "piyo",
+      "thumbnail": "/blog/2020/01/23/thumb.png",
+      "category": {
+        "name": "tech",
+        "slug": "tech"
+      },
+      "tags": [
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
+      ],
+      "description": "piyopiyopiyopiyopiyopiyopiyopiyopiyo",
+      "dir": "contents/blog/json",
+      "base": "2020-01-piyo.json",
+      "ext": ".json",
+      "sourceBase": "2020-01-piyo.md",
+      "sourceExt": ".md"
+    },
     "contents/blog/json/2020-01-fugo.json": {
       "title": "fugo",
       "created_at": "2020-01-22T00:00:00.000Z",
       "slug": "fugo",
       "thumbnail": "/blog/2020/01/22/thumb.png",
       "category": {
-        "name": "tech",
-        "slug": "tech"
+        "name": "おみこし",
+        "slug": "omikoshi"
       },
       "tags": [
         {
@@ -120,10 +120,10 @@
       "sourceBase": "2020-01-fugo.md",
       "sourceExt": ".md"
     },
-    "contents/blog/json/2020-01-pepe.json": {
-      "title": "pepe",
+    "contents/blog/json/2020-01-hyan.json": {
+      "title": "hyan",
       "created_at": "2020-01-22T00:00:00.000Z",
-      "slug": "pepe",
+      "slug": "hyan",
       "thumbnail": "/blog/2020/01/22/thumb.png",
       "category": {
         "name": "tech",
@@ -145,9 +145,67 @@
       ],
       "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
       "dir": "contents/blog/json",
-      "base": "2020-01-pepe.json",
+      "base": "2020-01-hyan.json",
       "ext": ".json",
-      "sourceBase": "2020-01-pepe.md",
+      "sourceBase": "2020-01-hyan.md",
+      "sourceExt": ".md"
+    },
+    "contents/blog/json/2020-02-fugo.json": {
+      "title": "fugo",
+      "created_at": "2020-02-22T00:00:00.000Z",
+      "slug": "fugo",
+      "thumbnail": "/blog/2020/01/22/thumb.png",
+      "category": {
+        "name": "hoge",
+        "slug": "hoge"
+      },
+      "tags": [
+        {
+          "name": "Nuxt.js",
+          "slug": "nuxt-js"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
+      ],
+      "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
+      "dir": "contents/blog/json",
+      "base": "2020-02-fugo.json",
+      "ext": ".json",
+      "sourceBase": "2020-02-fugo.md",
+      "sourceExt": ".md"
+    },
+    "contents/blog/json/2020-02-test.json": {
+      "title": "test",
+      "created_at": "2020-02-29T00:00:00.000Z",
+      "slug": "test",
+      "category": {
+        "name": "hoge",
+        "slug": "hoge"
+      },
+      "tags": [
+        {
+          "name": "test",
+          "slug": "test"
+        },
+        {
+          "name": "jade",
+          "slug": "jade"
+        },
+        {
+          "name": "gulp",
+          "slug": "gulp"
+        }
+      ],
+      "dir": "contents/blog/json",
+      "base": "2020-02-test.json",
+      "ext": ".json",
+      "sourceBase": "2020-02-test.md",
       "sourceExt": ".md"
     },
     "contents/blog/json/2020-01-popo.json": {
@@ -180,44 +238,37 @@
       "sourceBase": "2020-01-popo.md",
       "sourceExt": ".md"
     },
-    "contents/blog/json/2020-02-fugo.json": {
-      "title": "fugo",
-      "created_at": "2020-02-22T00:00:00.000Z",
-      "slug": "fugo",
-      "thumbnail": "/blog/2020/01/22/thumb.png",
+    "contents/blog/json/2019-12-docment-counter.json": {
+      "title": "VueCLIとFirebaseを使って、原稿用紙の下書きができて締め切りを通知してくれるアプリをつくってみた",
+      "created_at": "2019-12-17T00:00:00.000Z",
+      "slug": "docment-counter",
       "category": {
-        "name": "hoge",
-        "slug": "hoge"
+        "name": "tech",
+        "slug": "tech"
       },
       "tags": [
         {
-          "name": "Nuxt.js",
-          "slug": "nuxt-js"
-        },
-        {
-          "name": "jade",
-          "slug": "jade"
-        },
-        {
-          "name": "gulp",
-          "slug": "gulp"
+          "name": "Vue.js",
+          "slug": "vue"
         }
       ],
-      "description": "fugofugofugofugofugofugofugofugofugofugofugofugo",
+      "description": "Vue.jsとFirebaseを利用してPWAでPush通知がくるメモアプリを作成してみました。ざっくり実装したことなどをご紹介しますm(_ _)m",
       "dir": "contents/blog/json",
-      "base": "2020-02-fugo.json",
+      "base": "2019-12-docment-counter.json",
       "ext": ".json",
-      "sourceBase": "2020-02-fugo.md",
+      "sourceBase": "2019-12-docment-counter.md",
       "sourceExt": ".md"
     }
   },
   "sourceFileArray": [
+    "contents/blog/2019-12-docment-counter.md",
     "contents/blog/2020-01-fugo.md",
     "contents/blog/2020-01-hoge.md",
     "contents/blog/2020-01-hyan.md",
     "contents/blog/2020-01-pepe.md",
     "contents/blog/2020-01-piyo.md",
     "contents/blog/2020-01-popo.md",
-    "contents/blog/2020-02-fugo.md"
+    "contents/blog/2020-02-fugo.md",
+    "contents/blog/2020-02-test.md"
   ]
 }

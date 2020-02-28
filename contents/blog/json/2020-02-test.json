@@ -1,0 +1,30 @@
+{
+  "title": "test",
+  "created_at": "2020-02-29T00:00:00.000Z",
+  "slug": "test",
+  "category": {
+    "name": "hoge",
+    "slug": "hoge"
+  },
+  "tags": [
+    {
+      "name": "test",
+      "slug": "test"
+    },
+    {
+      "name": "jade",
+      "slug": "jade"
+    },
+    {
+      "name": "gulp",
+      "slug": "gulp"
+    }
+  ],
+  "bodyContent": "# Markdown\n\n## ヘッダー\n\n# h1 Heading\n## h2 Heading\n### h3 Heading\n#### h4 Heading\n##### h5 Heading\n###### h6 Heading\n\n## 強調されたテキスト\n_テキストを強調する_\n\n## 打ち消し線\n~~打ち消し線~~\n\n## 強い重要性\n__強い重要性__\n\n## 強調かつ強い重要性\n___強調かつ強い重要性___\n\n## リンク\n### 名前付きリンク\n[google](https://www.google.com/)\n\n## テーブル\nテーブルヘッダー1  | テーブルヘッダー2\n------------- | -------------\nテーブルコンテンツ1-1  | テーブルコンテンツ2-1\nテーブルコンテンツ1-2  | テーブルコンテンツ2-2\n\n## リスト\n### 順序なしリスト\n* 箇条書き1\n  * 入れ子\n    * 入れ子の入れ子\n* 箇条書き2\n\n### 順序付きリスト\n<!-- 順序付きリストは入れ子にならなそう -->\n1. 順序付き箇条書き1\n  1. 入れ子1\n  2. 入れ子2\n2. 順序付き箇条書き2\n\n## 引用\n> 引用\n>> 入れ子の引用\n\n## 画像\n![画像の代替テキスト](https://picsum.photos/200/50 \"画像タイトル\")\n\n## 水平線\n---\n\n## URL\nhttps://www.google.com/\n\n## コード\n```\"lang\":\"javascript\",\"title\":\"main.js\"\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```\n\n```Prism.js```を使ったハイライト\n\n```\"lang\":\"javascript\",\"highlight\":\"1-2\"\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```\n\n```\"number\":false,\"lang\":\"js\"\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```\n\n## 絵文字\n:smile:\n\n## 注釈\n注釈1へのリンク[^first].\n\n[^first]: 注釈1 **注釈もマークアップできる**\n\n## テキストのハイライト\n==ハイライト==\n\n## チェックリスト\n- [ ] 牛乳を買う\n- [x] パンを買う\n\n## 説明リスト\n名前 1\n\n:   定義1\n定義1の改行\n\n名前2 *名前のマークアッップ*\n\n:   定義2\n\n## ワーニング\n::: warning\nこれは注意文言です\n:::\n\n## 目次\n[[toc]]",
+  "bodyHtml": "<h1>Markdown</h1>\n<h2>ヘッダー</h2>\n<h1>h1 Heading</h1>\n<h2>h2 Heading</h2>\n<h3>h3 Heading</h3>\n<h4>h4 Heading</h4>\n<h5>h5 Heading</h5>\n<h6>h6 Heading</h6>\n<h2>強調されたテキスト</h2>\n<p><em>テキストを強調する</em></p>\n<h2>打ち消し線</h2>\n<p><s>打ち消し線</s></p>\n<h2>強い重要性</h2>\n<p><strong>強い重要性</strong></p>\n<h2>強調かつ強い重要性</h2>\n<p><em><strong>強調かつ強い重要性</strong></em></p>\n<h2>リンク</h2>\n<h3>名前付きリンク</h3>\n<p><a href=\"https://www.google.com/\">google</a></p>\n<h2>テーブル</h2>\n<table>\n<thead>\n<tr>\n<th>テーブルヘッダー1</th>\n<th>テーブルヘッダー2</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>テーブルコンテンツ1-1</td>\n<td>テーブルコンテンツ2-1</td>\n</tr>\n<tr>\n<td>テーブルコンテンツ1-2</td>\n<td>テーブルコンテンツ2-2</td>\n</tr>\n</tbody>\n</table>\n<h2>リスト</h2>\n<h3>順序なしリスト</h3>\n<ul>\n<li>箇条書き1\n<ul>\n<li>入れ子\n<ul>\n<li>入れ子の入れ子</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>箇条書き2</li>\n</ul>\n<h3>順序付きリスト</h3>\n<p>&lt;!-- 順序付きリストは入れ子にならなそう --&gt;</p>\n<ol>\n<li>順序付き箇条書き1</li>\n<li>入れ子1</li>\n<li>入れ子2</li>\n<li>順序付き箇条書き2</li>\n</ol>\n<h2>引用</h2>\n<blockquote>\n<p>引用</p>\n<blockquote>\n<p>入れ子の引用</p>\n</blockquote>\n</blockquote>\n<h2>画像</h2>\n<p><img src=\"https://picsum.photos/200/50\" alt=\"画像の代替テキスト\" title=\"画像タイトル\"></p>\n<h2>水平線</h2>\n<hr>\n<h2>URL</h2>\n<p>https://www.google.com/</p>\n<h2>コード</h2>\n<pre><code class=\"hljs\">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));</code></pre><p><code>Prism.js</code>を使ったハイライト</p>\n<pre><code class=\"hljs\">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));</code></pre><pre><code class=\"hljs\">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));</code></pre><h2>絵文字</h2>\n<p>:smile:</p>\n<h2>注釈</h2>\n<p>注釈1へのリンク[^first].</p>\n<p>[^first]: 注釈1 <strong>注釈もマークアップできる</strong></p>\n<h2>テキストのハイライト</h2>\n<p>==ハイライト==</p>\n<h2>チェックリスト</h2>\n<ul>\n<li>[ ] 牛乳を買う</li>\n<li>[x] パンを買う</li>\n</ul>\n<h2>説明リスト</h2>\n<p>名前 1</p>\n<p>:   定義1\n定義1の改行</p>\n<p>名前2 <em>名前のマークアッップ</em></p>\n<p>:   定義2</p>\n<h2>ワーニング</h2>\n<p>::: warning\nこれは注意文言です\n:::</p>\n<h2>目次</h2>\n<p>[[toc]]</p>\n",
+  "dir": "contents/blog/json",
+  "base": "2020-02-test.json",
+  "ext": ".json",
+  "sourceBase": "2020-02-test.md",
+  "sourceExt": ".md"
+}
