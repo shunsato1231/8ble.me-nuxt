@@ -152,10 +152,16 @@ export default {
   height 150px
   margin 0 10px
   h1
+    display -webkit-box
+    overflow hidden
     font-size(18px)
     height 35px
     line-height 35px
     font-weight 400
+    overflow hidden
+    -webkit-line-clamp 1
+    -webkit-box-orient vertical
+    overflow-wrap break-word
   div
     display -webkit-box
     overflow hidden

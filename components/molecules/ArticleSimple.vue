@@ -2,6 +2,8 @@
 article(:class="$style.article" @click="link")
   figure(v-if="post.thumbnail")
     img(:src="post.thumbnail")
+  figure(v-else :class="$style.noImage")
+     span No Image
   div(:class="$style.body")
     h1 {{post.title}}
     div(:class="$style.text") {{post.description}}
@@ -92,6 +94,22 @@ export default {
       +breakpoint(middle)
         width 150px
         height 150px
+  .noImage
+    display flex
+    align-items center
+    justify-content center
+    background #000
+    +breakpoint(small)
+      width 110px
+      height 110px
+    +breakpoint(middle)
+      width 150px
+      height 150px
+    span
+      font-family 'Rajdhani', sans-serif
+      font-size(18px)
+      font-weight 600
+      color #fff
   .body
     position relative
     +breakpoint(small)
@@ -101,9 +119,16 @@ export default {
       width calc(100% - 165px)
       margin-left 15px
     h1
+      display -webkit-box
+      overflow hidden
+      -webkit-box-orient vertical
+      max-width 100%
+      line-height 15px
+      height 15px
+      overflow-wrap break-word
+      -webkit-line-clamp 1
       +breakpoint(small)
         font-size(12px)
-        line-height 15px
       +breakpoint(middle)
         font-size(14px)
     .text
@@ -120,9 +145,9 @@ export default {
         -webkit-line-clamp 2
         line-height 15px /** 30 / 2 = 15**/
       +breakpoint(middle)
-        max-height 45px
-        -webkit-line-clamp 3
-        line-height 15px /** 45 / 3 = 15**/
+        max-height 90px
+        -webkit-line-clamp 5
+        line-height 15px /** 90 / 5 = 15**/
     footer
       position absolute
       bottom 0

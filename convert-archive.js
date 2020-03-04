@@ -64,6 +64,16 @@ const monthly = Object.keys(yearly).reduce((acc, key) => {
   return acc
 }, {})
 
-const output = { tags, categories, yearly, monthly }
+const createdIncrement = Object.keys(map)
+  .map(key => key)
+  .sort((a, b) => {
+    const momentA = moment(map[a].created_at)
+    const momentB = moment(map[b].created_at)
+
+    if (momentA.isAfter(momentB)) { return -1 }
+    if (momentA.isBefore(momentB)) { return 1 }
+  })
+
+const output = { tags, categories, yearly, monthly, createdIncrement }
 
 fs.writeFileSync('./contents/blog/archives.json', JSON.stringify(output))

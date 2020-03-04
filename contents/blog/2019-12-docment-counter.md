@@ -188,7 +188,7 @@ package pre-configured. Functions can be deployed with firebase deploy.
 
 Hostingの設定は下記のように設定
 
-```sh
+```"lang":"shell","number":false,"title":false
 === Hosting Setup
 
 Your public directory is the folder (relative to your project directory) that
@@ -203,7 +203,7 @@ have a build process for your assets, use your build's output directory.
 - config情報を管理画面から取得(今回はGitにコードをあげるために環境変数に格納)
 - main.jsで```firebase.initializeApp```を実行
 
-```javascript
+```"lang":"javascript","title":"main.js"
 
 import firebase from 'firebase/app'
 
@@ -227,7 +227,7 @@ firebase.initializeApp(config)
 
 これらの手順で生成されたものを元に、大まかに下記のようなフォルダ構成で作成しました。
 
-<pre>
+```
 ├── dist
 │   └── ビルド後に生成されるファイル
 │
@@ -274,7 +274,7 @@ firebase.initializeApp(config)
 │           ├── counter.js
 │           └── list.js
 └── vue.config.js
-</pre>
+```
 
 ![vuex.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/538820/935f9faa-6bc9-0050-ba08-8c1b879c9bf0.png)
 引用元: https://vuex.vuejs.org/ja/
@@ -323,7 +323,7 @@ export default {
 
 ```main.js``` に以下を追加
 
-```javascript
+```"lang":"javascript","title":"main.js"
 import Firebase from './api/firebase'
 
 Firebase.initFirebase()

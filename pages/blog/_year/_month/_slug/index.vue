@@ -6,14 +6,24 @@
       div(:class="$style.category")
         nuxt-link(:to="'/blog/category/' + category.slug" ref="category" v-html="$options.filters.zenkaku(category.name)")
       div(:class="$style.tags")
-        nuxt-link(v-for="tag in tags" :to="tag.slug" ref="tags" v-html="$options.filters.zenkaku(tag.name)")
-    .text(class="post-content" v-html="descriptionHtml + $md.render(bodyContent)")
+        nuxt-link(v-for="tag in tags" :to="'/blog/tag/' + tag.slug" ref="tags" v-html="$options.filters.zenkaku(tag.name)")
+      nuxt-link(:class="$style.prev" v-if="prev" :to="prev.url")
+        div(:class="$style.text")
+          p {{prev.title}}
+        i.fas.fa-chevron-right(:class="$style.icon")
+      nuxt-link(:class="$style.next" v-if="next" :to="next.url")
+        div(:class="$style.text")
+          p {{next.title}}
+        i.fas.fa-chevron-left(:class="$style.icon")
+    .text(:class="$style.text" v-html="descriptionHtml + $md.render(bodyContent)")
 </template>
 
 <script>
+import moment from 'moment'
 import { mapActions } from 'vuex'
 
-import { sourceFileArray } from '../../../../../contents/blog/summary.json'
+import { sourceFileArray, fileMap } from '../../../../../contents/blog/summary.json'
+import { createdIncrement } from '../../../../../contents/blog/archives.json'
 import Prism from '@/plugins/prism'
 
 export default {
@@ -33,6 +43,25 @@ export default {
   },
   async asyncData ({ params }) {
     const post = await require(`~/contents/blog/json/${params.year}-${params.month}-${params.slug}.json`)
+    const currentPath = `contents/blog/json/${params.year}-${params.month}-${params.slug}.json`
+    const currentIndex = createdIncrement.findIndex(val => val === currentPath)
+
+    const prevPost = fileMap[createdIncrement[currentIndex + 1]]
+    if (prevPost) {
+      const prevUrl = '/blog/' + moment(prevPost.created_at).format('YYYY/MM') + '/' + prevPost.slug
+      post.prev = { url: prevUrl, title: prevPost.title }
+    } else {
+      post.prev = false
+    }
+
+    const nextPost = fileMap[createdIncrement[currentIndex - 1]]
+    if (nextPost) {
+      const nextUrl = '/blog/' + moment(nextPost.created_at).format('YYYY/MM') + '/' + nextPost.slug
+      post.next = { url: nextUrl, title: nextPost.title }
+    } else {
+      post.next = false
+    }
+
     return Object.assign({}, post)
   },
   mounted () {
@@ -41,13 +70,22 @@ export default {
     this.setSidebarFlag(true)
 
     Prism.highlightAll()
+    this.removeNoTitle()
   },
   methods: {
     ...mapActions('baseLayout', [
       'setHeaderFlag',
       'setSidebarFlag',
       'setArchiveFlag'
-    ])
+    ]),
+
+    removeNoTitle () {
+      Array.from(document.getElementsByClassName('toolbar-item')).forEach((el) => {
+        if (el.children[0].textContent === 'no-title') {
+          el.style.display = 'none'
+        }
+      })
+    }
   },
   validate ({ params }) {
     return sourceFileArray.includes(`contents/blog/${params.year}-${params.month}-${params.slug}.md`)
@@ -59,11 +97,12 @@ export default {
 </script>
 <style lang="stylus" module>
 .meta
+  position relative
   width 90%
   margin 35px auto 100px
   text-align center
-  +breakpoint(small)
-    width 100%
+  +breakpoint(small middle)
+    padding 0 30px
   .title
     font-size(30px)
     font-weight 600
@@ -127,16 +166,109 @@ export default {
           margin-top -6px
           transform rotate(20deg)
           background-color #aaa
-</style>
+  .prev
+    display block
+    position fixed
+    right 0
+    top 55%
+    width 35px
+    height 100px
+    background #2e2e2e
+    border-radius 3px 0 0 3px
+    +breakpoint(small middle)
+      display table
+      position absolute
+      top 50%
+      right 5px
+      background none
+      width auto
+      height auto
+    &:before
+      content ''
+      position absolute
+      top 0
+      right 0
+      width 35px
+      height 100px
+      background #666
+      border-radius 3px 0 0 3px
+      z-index 2
+      transform scaleX(0)
+      transform-origin 0 100%
+      transition-property transform
+      transition-duration 0.6s
+      transition-timing-function cubic-bezier(1, 0, 0, 1)
+      +breakpoint(small middle)
+        display none
+    &:hover
+      &:before
+        transform scaleX(1)
+        transform-origin 0% 0%
+      .text
+        transform: translateX(0)
+    .text
+      position absolute
+      display flex
+      align-items center
+      justify-content center
+      top 0
+      right 35px
+      background-color rgba(0, 0, 0, 0.4)
+      width 200px
+      height 100px
+      padding 10px
+      font-size(16px)
+      color #fff
+      transform translateX(235px)
+      transition-duration 0.6s
+      transition-delay 0
+      transition-timing-function cubic-bezier(1, 0, 0, 1)
+      +breakpoint(small middle)
+        display none
+      p
+        display -webkit-box
+        overflow hidden
+        -webkit-line-clamp 4
+        -webkit-box-orient vertical
+        line-height 23px
+        overflow-wrap break-word
+    .icon
+      position absolute
+      display block
+      font-size(20px)
+      color #fff
+      top 50%
+      right 50%
+      transform translateX(50%)translateY(-50%)
+      z-index 3
+      +breakpoint(small middle)
+        font-size(24px)
+        color #000
 
-<style lang="stylus">
+  .next
+    @extends .prev
+    left 0
+    border-radius 0 3px 3px 0
+    +breakpoint(small middle)
+      left 5px
+    &:before
+      left 0
+      border-radius 0 3px 3px 0
+    .text
+      left 35px
+      transform translateX(-235px)
+
 .text
   width 90%
   margin 0 auto
   font-feature-settings "palt" 1
   font-family "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif
   +breakpoint(large)
-    width 80%
+    width 70%
+</style>
+
+<style lang="stylus">
+.text
   h1
     margin 80px auto
     padding-bottom 5px
@@ -303,6 +435,56 @@ export default {
     background: linear-gradient(transparent 40%, #FAFAD2 40%);
     font-weight bold
 
+  .table-wrapper
+    padding 10px
+    margin 30px 0
+    table
+      width 100%
+      min-width 400px
+      margin auto
+      border-collapse separate
+      border-spacing 0
+      border-radius 5px
+      border solid 1px #d1d1d1
+    tr
+      width 100%
+    th, td
+      box-sizing border-box
+      padding 15px
+    thead
+      th
+        font-size(12px)
+        background #000
+        color #fff
+        &:not(:last-child)
+          border-right solid 1px #666
+        &:first-child
+          border-radius 5px 0 0 0
+        &:last-child
+          border-radius 0 5px 0 0
+    tbody
+      font-size(12px)
+      th
+        background #ccc
+      tr
+        &:not(:last-child)
+          td
+            border-bottom solid 1px #d1d1d1
+        td:not(:last-child)
+          border-right solid 1px #d1d1d1
+  @media (max-width: 559px)
+    .table-wrapper
+      max-width 100%
+      overflow-x: scroll
+      &::-webkit-scrollbar
+        background #fff
+        border-radius 5px
+        height 6px
+        border 1px solid #eee
+      &::-webkit-scrollbar-thumb
+        background #eee
+        border-radius 5px
+
 .zenkaku
   font-size(14px)
 
@@ -364,6 +546,7 @@ pre:not(.number-line-style)
   border-radius 4px
   padding 15px
   overflow-y: scroll;
+  margin 15px 0
   code
     background initial
     border none
@@ -435,15 +618,19 @@ pre.number-line-style
     position absolute
     right 0
     top 0
-    padding 0 8px
-    height 24px
-    line-height 24px
-    background #d1d1d1
-    color #fff
-    border-radius 0 5px 0 5px
-    font-family 'Rajdhani', sans-serif
-    font-size(13px)
-    font-weight 500
+    span
+      display block
+      padding 0 8px
+      height 24px
+      line-height 24px
+      background #d1d1d1
+      color #fff
+      border-radius 0 5px 0 5px
+      font-family 'Rajdhani', sans-serif
+      font-size(13px)
+      font-weight 500
+      &:empty
+        display none
   pre, .line-numbers-rows
     padding-top 24px
     padding-bottom 24px

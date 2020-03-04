@@ -14,13 +14,15 @@ export default ({ app }, inject) => {
         const numberStyle = number ? 'number-line-style' : ''
 
         let title
-        if (lang) {
+        if (meta.title === false) {
+          title = 'data-language="no-title"'
+        } else if (lang) {
           title = meta.title ? 'data-language="' + meta.title + '"' : 'data-language="' + meta.lang + '"'
         } else {
-          title = meta.title ? 'data-language="' + meta.title + '"' : ''
+          title = meta.title ? 'data-language="' + meta.title + '"' : 'data-language="no-title"'
         }
 
-        return '<pre class="' + number + ' ' + numberStyle + '"' + highlight + '>' + '<code class="' + numberStyle + ' ' + lang + '"' + title + '>' + md.utils.escapeHtml(str) + '</code></pre>'
+        return '<pre class="' + number + ' ' + numberStyle + '"' + highlight + title + '>' + '<code class="' + numberStyle + ' ' + lang + '"' + '>' + md.utils.escapeHtml(str) + '</code></pre>'
       } catch {
         return '<pre><code>' + md.utils.escapeHtml(str) + '</code></pre>'
       }
@@ -61,6 +63,14 @@ export default ({ app }, inject) => {
     '<section class="footnotes">\n' +
     '<ol class="footnotes-list">\n'
   )
+
+  md.renderer.rules.table_open = (tokens, idx) => {
+    return '<div class="table-wrapper"><table>'
+  }
+
+  md.renderer.rules.table_close = (tokens, idx) => {
+    return '</table></div>'
+  }
 
   inject('md', md)
 }
