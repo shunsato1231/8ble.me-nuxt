@@ -101,7 +101,7 @@ export default {
 
     const organaization = {
       '@type': 'Organization',
-      '@id': process.env.baseUrl + '#org',
+      '@id': `${process.env.baseUrl}/#org`,
       'name': process.env.baseSiteName,
       'logo': {
         '@type': 'ImageObject',
@@ -113,7 +113,7 @@ export default {
       },
       'founder': {
         '@type': 'Person',
-        '@id': process.env.baseUrl + '#person'
+        '@id': `${process.env.baseUrl}/#person`
       }
     }
 
@@ -121,7 +121,7 @@ export default {
 
     const person = {
       '@type': 'Person',
-      '@id': process.env.baseUrl + '#person',
+      '@id': `${process.env.baseUrl}/#person`,
       'name': process.env.baseName,
       'gender': 'male',
       'description': process.env.profile,
@@ -142,7 +142,7 @@ export default {
 
       const webPage = {
         '@type': 'WebPage',
-        '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}#webpage`,
+        '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#webpage`,
         'url': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}`,
         'name': title,
         'isPartOf': {
@@ -151,12 +151,12 @@ export default {
         'inLanguage': 'ja',
         'primaryImageOfPage': {
           '@type': 'ImageObject',
-          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}#primaryimage`,
+          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#primaryimage`,
           'url': image
         },
         'description': desc,
         'breadcrumb': {
-          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}#breadcrumb`
+          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#breadcrumb`
         }
       }
       ldItems.push(webPage)
@@ -185,10 +185,14 @@ export default {
 
       const breadcrumb = {
         '@type': 'BreadcrumbList',
-        '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}#breadcrumb`,
+        '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#breadcrumb`,
         'itemListElement': breadcrumbItems
       }
       ldItems.push(breadcrumb)
+    }
+
+    if (this.ldItems) {
+      ldItems.push(this.ldItems)
     }
 
     return {

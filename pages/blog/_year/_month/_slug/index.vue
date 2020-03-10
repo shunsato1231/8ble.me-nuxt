@@ -59,6 +59,41 @@ export default {
         return ''
       }
     },
+    meta () {
+      return {
+        type: 'article',
+        title: `${this.title} | Blog | ${process.env.baseSiteName}`,
+        description: `${this.title} ${process.env.baseSiteName} Blog`,
+        image: this.thumbnail ? this.thumbnail : process.env.baseImage
+      }
+    },
+    ldItems () {
+      return [
+        {
+          '@type': 'BlogPosting',
+          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#article`,
+          'mainEntityOfPage': {
+            '@type': 'WebPage',
+            '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#webpage`
+          },
+          'headline': this.title,
+          'datePublished': this.created_at,
+          'dateModified': this.modified_at ? this.modified_at : this.created_at,
+          'author': {
+            '@type': 'Person',
+            '@id': `${process.env.baseUrl}/#person`
+          },
+          'publisher': {
+            '@type': 'Organization',
+            '@id': `${process.env.baseUrl}/#org`
+          },
+          'image': {
+            '@type': 'ImageObject',
+            '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#primaryimage`
+          }
+        }
+      ]
+    },
     breadcrumbs () {
       return [
         {

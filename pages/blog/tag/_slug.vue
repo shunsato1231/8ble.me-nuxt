@@ -23,6 +23,8 @@ import BackToButton from '../../../components/atoms/BackToButton.vue'
 import { fileMap } from '../../../contents/blog/summary.json'
 import { tags } from '../../../contents/blog/archives.json'
 
+import Meta from '~/assets/mixins/meta'
+
 export default {
   layout: 'baseLayout',
   components: {
@@ -30,9 +32,51 @@ export default {
     Pagination,
     BackToButton
   },
+  mixins: [Meta],
   computed: {
     currentIndex () {
       return this.$route.params.id ? Number(this.$route.params.id) : 1
+    },
+    ldItems () {
+      return [
+        {
+          '@type': 'CollectionPage',
+          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#webpage`,
+          'url': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}`,
+          'name': `Tag: ${this.tagName} | Blog | ${process.env.baseSiteName}`,
+          'isPartOf': {
+            '@id': process.env.baseUrl
+          },
+          'inLanguage': 'ja',
+          'about': {
+            '@id': `${process.env.baseUrl}/#org`
+          },
+          'description': `${process.env.baseSiteName} Blog ${this.tagName}タグの記事一覧`
+        }
+      ]
+    },
+    meta () {
+      return {
+        type: 'blog',
+        title: `Tag: ${this.tagName} | Blog | ${process.env.baseSiteName}`,
+        description: `${process.env.baseSiteName} Blog ${this.tagName}タグの記事一覧`
+      }
+    },
+    breadcrumbs () {
+      return [
+        {
+          text: process.env.baseDesc,
+          url: '/'
+        },
+        {
+          text: 'Blog',
+          url: '/blog/'
+        },
+        {
+          text: this.tagName,
+          url: `/blog/tag/${this.$route.params.slug}`
+        }
+      ]
     }
   },
   asyncData ({ params }) {

@@ -16,12 +16,50 @@ import BackToButton from '../../components/atoms/BackToButton.vue'
 
 import { sourceFileArray, fileMap } from '../../contents/blog/summary.json'
 
+import Meta from '~/assets/mixins/meta'
+
 export default {
   layout: 'baseLayout',
   components: {
     ArticleList,
     Pagination,
     BackToButton
+  },
+  mixins: [Meta],
+  data () {
+    return {
+      meta: {
+        title: `Blog | ${process.env.baseSiteName}`,
+        description: 'BLOG 記事一覧',
+        type: 'blog'
+      },
+      ldItems: [
+        {
+          '@type': 'CollectionPage',
+          '@id': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}/#webpage`,
+          'url': `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}`,
+          'name': `Blog | ${process.env.baseSiteName}`,
+          'isPartOf': {
+            '@id': process.env.baseUrl
+          },
+          'inLanguage': 'ja',
+          'about': {
+            '@id': `${process.env.baseUrl}/#org`
+          },
+          'description': 'BLOG 記事一覧'
+        }
+      ],
+      breadcrumbs: [
+        {
+          text: process.env.baseDesc,
+          url: '/'
+        },
+        {
+          text: 'Blog',
+          url: '/blog'
+        }
+      ]
+    }
   },
   computed: {
     currentIndex () {
