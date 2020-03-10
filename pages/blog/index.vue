@@ -2,6 +2,8 @@
   div
     ArticleList(:posts="posts")
     Pagination(:list="paginationList", :par="6", :currentIndex="currentIndex" path="/blog/page/" firstPath="/blog/")
+    div(:class="$style.pager")
+      BackToButton(text="TOP" href="/")
 </template>
 
 <script>
@@ -10,6 +12,7 @@ import { mapActions } from 'vuex'
 
 import ArticleList from '../../components/organisms/ArticleList.vue'
 import Pagination from '../../components/molecules/Pagination.vue'
+import BackToButton from '../../components/atoms/BackToButton.vue'
 
 import { sourceFileArray, fileMap } from '../../contents/blog/summary.json'
 
@@ -17,7 +20,8 @@ export default {
   layout: 'baseLayout',
   components: {
     ArticleList,
-    Pagination
+    Pagination,
+    BackToButton
   },
   computed: {
     currentIndex () {
@@ -59,3 +63,9 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" module>
+  .pager
+    width 90%
+    margin 50px auto 20px auto
+</style>

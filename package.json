@@ -16,6 +16,7 @@
     "convert-blog": "yarn run convert-posts && yarn run convert-archive"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "gsap": "^3.0.5",
     "markdown-it": "^10.0.0",
     "markdown-it-deflist": "^2.0.3",
@@ -23,6 +24,7 @@
     "markdown-it-mark": "^3.0.0",
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
+    "nuxt-jsonld": "^1.4.5",
     "nuxt-webfontloader": "^1.1.0",
     "prismjs": "^1.19.0",
     "pug": "^2.0.4",

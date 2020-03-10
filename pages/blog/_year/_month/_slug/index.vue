@@ -15,7 +15,18 @@
         div(:class="$style.text")
           p {{next.title}}
         i.fas.fa-chevron-left(:class="$style.icon")
-    .text(:class="$style.text" v-html="descriptionHtml + $md.render(bodyContent)")
+    div(:class="$style.textWrapper")
+      .text(v-html="descriptionHtml + $md.render(bodyContent)")
+      aside(:class="$style.share")
+        div(:class="$style.shareTitle") Share on
+        div(:class="$style.shareButtonWrapper")
+          ShareButton(href="hoge" :iconClass="['fab', 'fa-twitter']" hoverColor="#00acee" text="ツイートする")
+          ShareButton(href="hoge" :iconClass="['fab', 'fa-facebook-f']" hoverColor="#2c4762" text="シェアする")
+          ShareButton(href="hoge" :iconClass="['fab', 'fa-google-plus-g']" hoverColor="#dd4b39" text="共有する")
+          ShareButton(href="hoge" :iconClass="['fab', 'fa-hatena']" hoverColor="#008ce0" text="はてぶする")
+      Breadcrumbs(:breadcrumbs='breadcrumbs')
+    div(:class="$style.pager")
+      BackToButton(text="BLOG" href="/blog")
 </template>
 
 <script>
@@ -24,14 +35,22 @@ import { mapActions } from 'vuex'
 
 import { sourceFileArray, fileMap } from '../../../../../contents/blog/summary.json'
 import { createdIncrement } from '../../../../../contents/blog/archives.json'
+
+import ShareButton from '../../../../../components/molecules/ShareButton.vue'
+import Breadcrumbs from '../../../../../components/molecules/Breadcrumbs.vue'
+import BackToButton from '../../../../../components/atoms/BackToButton.vue'
+
 import Prism from '@/plugins/prism'
+import Meta from '~/assets/mixins/meta'
 
 export default {
-  layout: 'baseLayout',
-  data () {
-    return {
-    }
+  components: {
+    ShareButton,
+    Breadcrumbs,
+    BackToButton
   },
+  mixins: [Meta],
+  layout: 'baseLayout',
   computed: {
     descriptionHtml () {
       if (this.description) {
@@ -39,6 +58,26 @@ export default {
       } else {
         return ''
       }
+    },
+    breadcrumbs () {
+      return [
+        {
+          text: process.env.baseDesc,
+          url: '/'
+        },
+        {
+          text: 'Blog',
+          url: `/blog`
+        },
+        {
+          text: this.category.name,
+          url: `/blog/category/${this.category.slug}`
+        },
+        {
+          text: this.title,
+          url: `${this.$router.history.base}${this.$route.path}`
+        }
+      ]
     }
   },
   async asyncData ({ params }) {
@@ -90,9 +129,6 @@ export default {
   validate ({ params }) {
     return sourceFileArray.includes(`contents/blog/${params.year}-${params.month}-${params.slug}.md`)
   }
-  // head () {
-  //   const url = `${this.url}/blog/${this.params.year}/${this.params.month}/${this.params.slug}/`
-  // }
 }
 </script>
 <style lang="stylus" module>
@@ -258,13 +294,37 @@ export default {
       left 35px
       transform translateX(-235px)
 
-.text
+.textWrapper
   width 90%
   margin 0 auto
   font-feature-settings "palt" 1
   font-family "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif
   +breakpoint(large)
     width 70%
+
+.share
+  width 100%
+  margin 80px auto 10px auto
+  border-top 1px solid #ddd
+  border-bottom 1px solid #ddd
+  padding 30px 0
+  .shareTitle
+    font-family 'Rajdhani', sans-serif
+    font-weight 600
+    font-size(18px)
+    text-align center
+  .shareButtonWrapper
+    margin 30px auto 0
+    width 240px
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    & > *
+      margin-bottom 20px
+
+.pager
+  width 90%
+  margin 50px auto 20px auto
 </style>
 
 <style lang="stylus">

@@ -8,6 +8,8 @@
       span all posts
     ArticleList(:posts="posts")
     Pagination(:list="paginationList", :par="6", :currentIndex="currentIndex" :path="'/blog/' + $route.params.year + '/page/'" :firstPath="'/blog/' + $route.params.year")
+    div(:class="$style.pager")
+      BackToButton(text="INDEX" href="/blog")
 </template>
 
 <script>
@@ -16,6 +18,7 @@ import { mapActions } from 'vuex'
 
 import ArticleList from '../../../components/organisms/ArticleList.vue'
 import Pagination from '../../../components/molecules/Pagination.vue'
+import BackToButton from '../../../components/atoms/BackToButton.vue'
 
 import { fileMap } from '../../../contents/blog/summary.json'
 import { yearly } from '../../../contents/blog/archives.json'
@@ -24,7 +27,8 @@ export default {
   layout: 'baseLayout',
   components: {
     ArticleList,
-    Pagination
+    Pagination,
+    BackToButton
   },
   computed: {
     currentIndex () {
@@ -102,4 +106,7 @@ export default {
       display inline-block
       margin-right 5px
       transform translateY(1px)
+  .pager
+    width 90%
+    margin 50px auto 20px auto
 </style>

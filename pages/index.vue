@@ -16,14 +16,9 @@ import HomeAbout from '../components/organisms/HomeAbout.vue'
 import HomeBlog from '../components/organisms/HomeBlog.vue'
 import HomeContact from '../components/organisms/HomeContact.vue'
 
+import Meta from '~/assets/mixins/meta'
+
 export default {
-  head () {
-    return {
-      bodyAttrs: {
-        class: 'noScroll'
-      }
-    }
-  },
   components: {
     SectionScrollWrapper,
     Home,
@@ -31,8 +26,10 @@ export default {
     HomeBlog,
     HomeContact
   },
+  mixins: [Meta],
   data () {
     return {
+      noScroll: true,
       sectionList: [
         { hash: '', ref: 'home' },
         { hash: '#about', ref: 'about' },
