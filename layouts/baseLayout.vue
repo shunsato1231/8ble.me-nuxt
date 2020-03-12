@@ -1,5 +1,5 @@
 <template lang="pug">
-  main
+  main#main
     transition
       Header(v-if="headerFlag")
     transition
@@ -29,6 +29,14 @@ export default {
       stateToggle: ''
     }
   },
+  watch: {
+    '$route' () {
+      this.loading()
+    }
+  },
+  mounted () {
+    this.loading()
+  },
   computed: {
     ...mapGetters('baseLayout', [
       'headerFlag',
@@ -50,6 +58,12 @@ export default {
   methods: {
     changeToggle (flag) {
       this.stateToggle = flag
+    },
+    loading () {
+      this.$nextTick(() => {
+        this.$nuxt.$loading.start()
+        setTimeout(() => this.$nuxt.$loading.finish(), 1000)
+      })
     }
   }
 }

@@ -16,6 +16,7 @@ const baseName = BASE_NAME || 'name'
 const baseProfileImg = BASE_PROFILE_IMG || 'profile.png'
 export default {
   mode: 'universal',
+  loading: '~/components/atoms/Loading.vue',
   env: {
     baseSiteName,
     baseDesc,
